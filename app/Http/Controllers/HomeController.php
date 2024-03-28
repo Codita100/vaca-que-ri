@@ -33,6 +33,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        dd('hahaaaa');
         return redirect()->route('login');
     }
 
