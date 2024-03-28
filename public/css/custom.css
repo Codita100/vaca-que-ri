@@ -1,0 +1,87 @@
+.main_color {
+    color: #E4211F;
+}
+
+a {
+    color: #E4211F;
+}
+
+a:hover {
+    color: #00783f;
+}
+
+.bg-custom-primary {
+    background-color: #E4211F;
+}
+
+th{
+    font-size: 14px;
+}
+
+.main_button {
+    background-color: #E4211F;
+    display: inline-block;
+    /*padding: 15px 28px;*/
+    border-radius: 5px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.btn-info{
+    font-size: 14px !important;
+}
+
+.btn-warning{
+    font-size: 14px !important;
+}
+
+.main_button:hover {
+    background-color: #00783f;
+    color: lightgray;
+}
+
+/* Meniu - left */
+.menu-item.menu-open > .menu-link {
+    color: white;
+    background-color: #E4211F;
+}
+
+.menu-item.menu-open > .menu-link:hover {
+    color: #6f6b7d;
+}
+
+
+.table:not(.table-dark) thead:not(.table-dark) th {
+    color: white;
+}
+
+.my-container {
+    background-color: #fff;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.threshold-box {
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.threshold-box p {
+    margin: 0;
+}
+
+.threshold-value {
+    font-weight: bold;
+    color: orange;
+}
+
+.form-check-input:checked{
+    background-color: #00783F !important;
+    border-color: #00783F !important;
+}
