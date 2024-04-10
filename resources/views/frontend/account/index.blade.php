@@ -55,7 +55,7 @@
 
                                 <div class="stock-overlay position-absolute top-0 end-0 p-2" style="margin-top: -24px; margin-right: -20px">
                                     <div class="label text-dark px-3 py-1 rounded-pill" style="background-color: #FAF6EA">
-                                        You have: {{ \App\Models\Backend\Order::getProductCountForUser(Auth::id(), $product->id) }}
+                                        You have: {{$product->userProductCount}}
                                     </div>
                                 </div>
                             </div>

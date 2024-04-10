@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Imports\SalesForce;
 use App\Models\Backend\Campaign;
+use App\Models\Backend\Order;
 use App\Models\Backend\UserTransaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -141,6 +142,8 @@ class UserController extends Controller
         $accumulatedPoints = $user->points_in->sum('accumulated_points');
         $consumedPoints = $user->points_out->sum('consumed_points');
         $totalPoints = $accumulatedPoints - $consumedPoints;
-        return view('backend.users.all_about_user', compact('user', 'orders', 'totalPoints'));
+
+        $catalog_orders = Order::where('user_id',$user->id)->get();
+        return view('backend.users.all_about_user', compact('user', 'orders', 'totalPoints', 'catalog_orders'));
     }
 }

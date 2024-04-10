@@ -37,9 +37,9 @@
 
     <!-- Login -->
     <div class="col-md-6 d-flex align-items-center">
-        <div class="mx-auto text-center">
+
             @yield('auth')
-        </div>
+
     </div>
 </div>
 

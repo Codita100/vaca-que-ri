@@ -19,33 +19,15 @@ class CodesImport implements ToCollection, WithHeadingRow
 
         foreach ($collection as $row) {
 
-            if (empty($row['code'])) {
-                Log::error('Rând invalid...');
-                $codesNotImported++;
-                continue;
-            }
+            $product = Product::find(1);
 
-            if (Cod::whereRaw('BINARY cod REGEXP ?', $row['code'])->exists()) {
-                Log::error('Există deja codul in baza ' . $row['code'] );
-                $codesNotImported++;
-                continue;
-            }
-
-
-            $product = Product::find($row['productid']);
-
-
-            if ($product) {
                 $new_code = new Cod;
                 $new_code->cod = $row['code'];
-                $new_code->product_id = $row['productid'];
+                $new_code->product_id = $product->id;
                 $new_code->status = 0;
                 $new_code->save();
                 $codesImported++;
-            } else {
-                Log::error('The product with id ' . $row['productid'] . ' doesnt exist.');
-                $codesNotImported++;
-            }
+
         }
 
         return redirect()->back()->with('warning', $codesImported . " codes imported, " . $codesNotImported . " codes not imported");

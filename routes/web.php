@@ -57,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
         Route::group(['prefix' => '/my-account'], function () {
             Route::get('/', [MyAccountController::class, 'index'])->name('account.index');
             Route::get('/address', [MyAccountController::class, 'indexAddress'])->name('address.index');
+            Route::post('/address', [MyAccountController::class, 'storeAddress'])->name('address.store');
 
         });
 

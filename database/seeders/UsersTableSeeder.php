@@ -21,10 +21,9 @@ class UsersTableSeeder extends Seeder
         ]);
 
         \App\Models\User::factory()->create([
-
             'name' => 'Admin',
-            'email' => 'codita06@gmail.com',
-            'password' => bcrypt('Teamor123'),
+            'email' => 'cristinab@createdirect.ro',
+            'password' => bcrypt('CrisProject'),
             'token' => Str::random(16),
         ]);
     }

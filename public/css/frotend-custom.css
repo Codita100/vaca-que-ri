@@ -213,4 +213,7 @@ th {
 /*Transaction table END*/
 
 
+.active-link {
+    border-bottom: 6px solid #C40503;
+}
 

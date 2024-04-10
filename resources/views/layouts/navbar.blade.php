@@ -7,7 +7,6 @@
     class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
     id="layout-navbar">
 
-    <!-- Adaugă textul dorit în partea stângă -->
     <div class="navbar-brand">
         <h4 class="navbar-text mt-3"><strong>Project</strong>
         </h4>
@@ -75,21 +74,7 @@
                             </div>
                         </a>
                     </li>
-                    <li>
-                        <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="">
-                            <i class="ti ti-user-check me-2 ti-sm"></i>
-                            <span class="align-middle">Profilul meu</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#">
-                            <i class="ti ti-settings me-2 ti-sm"></i>
-                            <span class="align-middle">Settings</span>
-                        </a>
-                    </li>
+
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>

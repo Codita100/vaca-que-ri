@@ -51,6 +51,37 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="row my-3">
+            <table id="orders" class="display" style="width:100%; background-color: #ffffff; color: black;">
+                <thead style="background-color: black; color: white !important;">
+                <tr>
+                    <th>#</th>
+                    <th>OrderId</th>
+                    <th>Product</th>
+                    <th>Points</th>
+                    <th>Created_at</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @php
+                    $i = 1;
+                @endphp
+                @foreach ($catalog_orders as $order)
+                    <tr>
+                        <td>{{$i++}}</td>
+                        <td>{{$order->id}}</td>
+                        <td>{{$order->productCatalog->name}}</td>
+                        <td>{{$order->productCatalog->points}}</td>
+                        <td>{{$order->created_at}}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+
+
     </div>
 @endsection
 
@@ -58,6 +89,14 @@
     <script>
         $(document).ready(function () {
             $('#myTable').DataTable({
+                order: [[0, 'desc']],
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#orders').DataTable({
                 order: [[0, 'desc']],
             });
         });
