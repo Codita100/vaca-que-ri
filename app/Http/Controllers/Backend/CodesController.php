@@ -13,8 +13,7 @@ class CodesController extends Controller
 {
     public function index()
     {
-        $codes = Cod::all();
-        return view('backend.codes.index', compact('codes'));
+              return view('backend.codes.index');
     }
 
     public function getCodes(Request $request)
@@ -26,16 +25,13 @@ class CodesController extends Controller
             3 => 'status',
         );
 
-        $codes = Cod::count();
-
-
         $limit = $request->input('length');
         $start = $request->input('start');
         $dir = $request->input('order.0.dir');
         $orderColumnIndex = $request->input('order.0.column');
         $order = $columns[$orderColumnIndex] ?? 'created_at';
 
-        // Query pentru a obține datele
+
         $query = Cod::join('products', 'cod.product_id', '=', 'products.id')
             ->select('cod.id', 'cod.cod', 'cod.product_id',  'products.name as product_name',  'cod.status');
 
@@ -56,8 +52,6 @@ class CodesController extends Controller
                         }
                     })
                     ->orWhere('products.name', 'LIKE', "%{$search}%");
-
-
             });
         }
 
@@ -75,7 +69,6 @@ class CodesController extends Controller
             $nestedData['id'] = $cod->id;
             $nestedData['cod'] = $cod->cod;
             $nestedData['product_id'] = $cod->product_name;
-//            $nestedData['product_photo'] = '<img src="' . asset('/images/products/' . $cod->photo) . '" alt="Product Image" style="max-width: 100px; max-height: 100px;">';
 
             $statusName = Cod::getStatusName($cod->status);
             switch (strtolower($statusName)) {
