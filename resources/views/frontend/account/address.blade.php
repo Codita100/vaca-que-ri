@@ -20,7 +20,7 @@
                     <img src="{{asset('images/graphics/address_graphic1.png')}}" class="img-fluid" style="max-width: 200px">
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6 px-4">
                     <form action="{{ route('address.store') }}" method="post">
                         @csrf
 

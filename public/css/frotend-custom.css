@@ -145,7 +145,7 @@ th {
     background-color: #ffffff;
     color:#234780;
     border-radius: 0px;
-    min-width: 800px;
+    width: 100%;
 }
 
 .button-facebook img {
@@ -170,7 +170,7 @@ th {
     background-color: #ffffff;
     color:#234780;
     border-radius: 0px;
-    min-width: 800px;
+    width: 100%;
 }
 
 .button-google img {
@@ -310,7 +310,17 @@ th {
 
 .footer-links{
     text-align: center;
-    margin-top: 100px;
+}
+
+
+.img-sm {
+    width: 70%;
+}
+
+@media (max-width: 768px) {
+    .img-sm {
+        width: 45%;
+    }
 }
 
 

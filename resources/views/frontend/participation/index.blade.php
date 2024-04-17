@@ -1,7 +1,13 @@
 @extends('layouts.frontend_master')
 <!-- Content -->
 @section('content-frontend')
-
+<style>
+    @media (max-width: 768px) {
+        .img-sm {
+            width: 50%;
+        }
+    }
+</style>
     <section class="background_second_color py-5">
         <div class="container-fluid">
             <div class="row">
@@ -12,30 +18,28 @@
                             <h3 class="text-center monstro second_color"><strong>COMO PARTICIPAR</strong></h3>
                         </div>
                         <div class="col-md-3 text-center">
-                            <img src="{{asset('images/static/participation_1.jpg')}}" class="img-fluid"
-                                 style="width: 60%"/>
+
+                            <img src="{{asset('images/static/participation_1.jpg')}}" class="img-fluid img-sm" />
                             <p class="myriad main_color" style="font-size: 15px"><strong>1. COMPRA O PRODUTO A VACA QUE
                                     RI COM O
                                     PACK PROMOCIONAL</strong></p>
                         </div>
 
+
                         <div class="col-md-3 text-center">
-                            <img src="{{asset('images/static/participation_2.jpg')}}" class="img-fluid"
-                                 style="width: 60%"/>
+                            <img src="{{asset('images/static/participation_2.jpg')}}"  class="img-fluid img-sm" />
                             <p class="myriad main_color" style="font-size: 15px"><strong>2. REGISTA-TE NO
                                     WEBSITE </strong></p>
                         </div>
 
                         <div class="col-md-3 text-center">
-                            <img src="{{asset('images/static/participation_3.jpg')}}" class="img-fluid"
-                                 style="width: 60%"/>
+                            <img src="{{asset('images/static/participation_3.jpg')}}"  class="img-fluid img-sm" />
                             <p class="myriad main_color" style="font-size: 15px"><strong>3. SUBMETE O CÓDIGO PRESENTE NO
                                     INTERIOR DO PACK PROMOCIONAL </strong></p>
                         </div>
 
                         <div class="col-md-3 text-center">
-                            <img src="{{asset('images/static/participation_4.jpg')}}" class="img-fluid"
-                                 style="width: 60%"/>
+                            <img src="{{asset('images/static/participation_4.jpg')}}"  class="img-fluid img-sm" />
                             <p class="myriad main_color" style="font-size: 15px"><strong>4. ACUMULA PONTOS E TROCA-OS
                                     PELOS TEUS
                                     PRÉMIOS FAVORITOS </strong></p>
@@ -57,13 +61,13 @@
 
 
 
-    <section style="background-color: #fff" class="py-5">
+    <section style="background-color: #fff" class="py-md-5">
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-md-2 align-self-start d-none d-md-block" style="margin-top: -100px; max-width: 220px">
                     <img src="{{asset('images/graphics/como_participar_graphic1.png')}}" class="img-fluid  mx-auto">
                 </div>
-                <div class="col-md-8 my-5">
+                <div class="col-md-8 my-md-5 mb-5">
                     <div class="row justify-content-center">
                         <div class="col-md-10 my-5">
                             <h3 class="second_color text-center monstro"><strong>ENCONTRA OS CÓDIGOS NO INTERIOR DOS
@@ -112,7 +116,7 @@
                     <div class="row">
                         @foreach($prizes as $product)
 
-                            <div class="col-md-3 mx-auto my-5 p-3">
+                            <div class="col-md-3 mx-auto my-md-5 p-3">
                                 <div class="product position-relative">
                                     <div class="product-top">
                                         <div id="multiImageCarousel_{{$loop->index}}" class="carousel slide"

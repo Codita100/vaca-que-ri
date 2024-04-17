@@ -39,7 +39,7 @@
         </div>
     </section>
 
-    <section class="background_main_color p-5">
+    <section class="background_main_color px-5 pt-5">
         <div class="container-fluid">
             <div class="row text-center my-5">
                 <h3 class="text-white monstro"><strong>PREMIOS</strong></h3>

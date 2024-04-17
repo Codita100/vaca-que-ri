@@ -18,27 +18,24 @@
 <style>
     body {
         overflow-x: hidden;
+        background-color: #FABE55;
     }
 
-    .max-height-image {
-        max-height: 100vh;
-        width: auto;
-    }
 </style>
 
 <body>
 @include('layouts.errors')
 
-<div class="row">
-    <div class="col-md-6" style="padding-right: 0px; !important;">
-        <img src="{{asset('images/bg-login.jpg')}}" class="img-fluid">
-    </div>
+<div class="row" >
 
     <!-- Login -->
-    <div class="col-md-6 d-flex align-items-center background_main_color">
+    <div class="col d-flex align-items-center background_main_color order-md-2">
+        @yield('auth')
+    </div>
 
-            @yield('auth')
-
+    <div class="col-md-5 p-0  order-md-1">
+        <img src="{{asset('images/bg-login.jpg')}}" class="img-fluid h-100 d-md-block d-none" alt="Imagine">
+        <img src="{{asset('images/bg-login.jpg')}}" class="img-fluid d-md-none" alt="Imagine">
     </div>
 </div>
 

@@ -34,10 +34,10 @@ class AccumulateController extends Controller
 
                 UserTransactionService::insertTransaction(Auth::id(), $points->id);
 
-                return redirect()->route('transactions.index')->with('success', 'Ok');
+                return redirect()->route('transactions.index')->with('success', 'O código foi salvo com sucesso');
             } else {
 
-                return redirect()->back()->with('info', 'Ups');
+                return redirect()->back()->with('warning', 'O código está incorreto.');
             }
         } else {
             $points = new UserPointsIn();
@@ -48,7 +48,7 @@ class AccumulateController extends Controller
             $points->save();
 
             UserTransactionService::insertTransaction(Auth::id(), $points->id);
-            return redirect()->back()->with('warning', 'Cod inexistent');
+            return redirect()->back()->with('warning', 'O código está incorreto.');
         }
     }
 }

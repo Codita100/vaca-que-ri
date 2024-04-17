@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-                <div class="row my-3">
+                <div class="row mt-3">
                     <form id="formAuthentication" class="mb-3" action="{{route('login.user')}}" method="POST">
                         @csrf
                         <div class="mb-3">

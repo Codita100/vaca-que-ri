@@ -2,9 +2,10 @@
 <!-- Content -->
 @section('auth')
     <div class="container">
-        <div class="row">
+        <div class="row my-0">
             <div class="col-md-9 mx-auto">
                 @include('layouts.frontend.top_auth')
+
                     <div class="row">
                         <h5><strong class="monstro text-white">FAZ LOGIN PARA PARTICIPAR:</strong></h5>
                         <h2 class="monstro" style="color: #db1d19"><strong>BEM-VINDO(A)!</strong></h2>
@@ -79,7 +80,6 @@
                     </div>
                 @include('layouts.frontend.footer_auth')
                 </div>
-            </div>
         </div>
     </div>
 
