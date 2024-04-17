@@ -147,7 +147,7 @@ class AuthController extends Controller
         $user->email_verified_at = Carbon::now();
         $user->save();
 
-        return redirect()->route('home')->with('success', 'Emailul a fost verificat cu succes!');
+        return redirect()->route('login')->with('success', 'O email foi verificado com sucesso!');
     }
 
     public function forgotPassword()
