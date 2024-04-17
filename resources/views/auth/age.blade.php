@@ -16,16 +16,16 @@
                         <div class="col-md-6 mx-auto">
                             <div class="row my-3">
                                 <div class="col">
-                                    <input type="text" maxlength="2" size="4" class="form-control custom-input"
-                                           placeholder="DD" name="day">
+                                    <input type="number" min=1 maxlength="2" size="4" class="form-control custom-input"
+                                           placeholder="DD"  name="day"  value="{{ old('day') }}">
                                 </div>
                                 <div class="col">
-                                    <input type="text" maxlength="2" size="4" class="form-control custom-input"
-                                           placeholder="MM" name="month">
+                                    <input type="number" min=1 maxlength="2" size="4" class="form-control custom-input"
+                                           placeholder="MM"  name="month"  value="{{ old('month') }}">
                                 </div>
                                 <div class="col">
-                                    <input type="text" maxlength="4" size="4" class="form-control custom-input"
-                                           placeholder="YY" name="year">
+                                    <input type="number" min=1 maxlength="4" size="4" class="form-control custom-input"
+                                           placeholder="YY"  name="year"  value="{{ old('year') }}">
                                 </div>
                             </div>
 
@@ -41,7 +41,6 @@
                 @include('layouts.frontend.footer_auth')
             </div>
         </div>
-    </div>
     </div>
 
 @endsection

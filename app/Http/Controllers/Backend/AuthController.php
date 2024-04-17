@@ -30,8 +30,8 @@ class AuthController extends Controller
     {
 
         $messages = [
-            'email.required' => 'Adresa de email este obligatorie',
-            'password.required' => 'Nu ai introdus parola',
+            'email.required' => "O endereço de e-mail é obrigatório",
+            'password.required' => 'Você não inseriu a senha.',
         ];
 
         $validator = Validator::make($request->all(),
@@ -51,7 +51,7 @@ class AuthController extends Controller
 
         if ($user) {
             if ($user->email_verified_at == null) {
-                return back()->with('error', 'Te rugam verifica daca ai contul activ');
+                return back()->with('error', 'Por favor, verifique se sua conta está ativa.');
             }
 
             //check for password
@@ -63,10 +63,10 @@ class AuthController extends Controller
                     return redirect()->route('account.index');
                 }
             } else {
-                return back()->with('error', 'Te rugam sa verifici credentialele');
+                return back()->with('error', "Por favor, verifique suas credenciais.");
             }
         } else {
-            return back()->with('error', 'Te rugam sa verifici credentialele');
+            return back()->with('error', "Por favor, verifique suas credenciais.");
         }
     }
 
@@ -139,7 +139,7 @@ class AuthController extends Controller
         $user = User::where('token', $token)->first();
 
         if (!$user) {
-            return redirect('/login')->with('error', 'Tokenul de verificare nu este valid.');
+            return redirect('/login')->with('error', 'O token de verificação não é válido.');
         }
 
         $timestampedToken = time() . '_' . Str::random(16);
