@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Mail\Backend\ResetEmail;
 use App\Mail\Frontend\RegisterEmail;
+use App\Models\Backend\Address;
 use App\Models\Backend\Campaign;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -74,12 +76,17 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login')->with('success', 'Ai fost delogat');
+        return redirect('/')->with('success', 'Você foi despejado');
     }
 
 
     public function store(Request $request)
     {
+        if (!$request->cookie('age_verification')) {
+            return redirect()->route('age')->with('error', 'Você deve ter pelo menos 18 anos para se registrar.');
+        }
+
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users|max:255',
@@ -108,6 +115,14 @@ class AuthController extends Controller
         $user->token = $token;
         $user->save();
 
+        $birthDay = new Address();
+        $birthDay->user_id = $user->id;
+        $birthDay->day = $request->cookie('day');
+        $birthDay->month = $request->cookie('month');
+        $birthDay->year = $request->cookie('year');
+        $birthDay->save();
+
+
 
         $user->assignRole('user');
 
@@ -116,7 +131,7 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             Log::info('Nu s-a trimis emailul pentru inregistrare');
         }
-        return redirect()->route('login')->with('success', 'Un email a fost trimit catre adresa ta pentru a valida contul');
+        return redirect()->route('login')->with('success', 'Um e-mail foi enviado para seu endereço para validar sua conta');
     }
 
     public function verify(Request $request, $token)
@@ -195,9 +210,56 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Parola ta a fost schimbata cu succes');
     }
 
-    public function register(){
+    public function register(Request $request) {
         return view('auth.register');
     }
 
+    public function age(){
+        return view('auth.age');
+    }
+
+    public function ageRescrition(Request $request)
+    {
+
+        $rules = [
+            'day' => 'required|numeric|min:1|max:31',
+            'month' => 'required|numeric|min:1|max:12',
+            'year' => 'required|numeric|max:2006',
+        ];
+
+        $messages = [
+            'day.required' => 'O campo dia é obrigatório.',
+            'day.numeric' => 'O campo dia deve ser um número.',
+            'day.min' => 'O campo dia deve ser no mínimo :min.',
+            'day.max' => 'O campo dia não pode ser maior que :max.',
+            'month.required' => 'O campo mês é obrigatório.',
+            'month.numeric' => 'O campo mês deve ser um número.',
+            'month.min' => 'O campo mês deve ser no mínimo :min.',
+            'month.max' => 'O campo mês não pode ser maior que :max.',
+            'year.required' => 'O campo ano é obrigatório.',
+            'year.numeric' => 'O campo ano deve ser um número.',
+            'year.min' => 'Você deve ter pelo menos 18 anos para se inscrever.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $birthDay = Carbon::createFromFormat('d/m/Y', $request->day.'/'.$request->month.'/'.$request->year);
+        $thisDay = Carbon::now();
+
+        $age = $birthDay->diffInYears($thisDay);
+        if ($age < 18) {
+            return redirect()->back()->with('error', 'Você deve ter pelo menos 18 anos para se inscrever.');
+        } else {
+
+            return redirect()->route('participation.index')->withCookie(Cookie::make('age_verification', true, 60*24*30))
+                ->withCookie(Cookie::make('day', $request->day, 60*24*30))
+                ->withCookie(Cookie::make('month', $request->month, 60*24*30))
+                ->withCookie(Cookie::make('year', $request->year, 60*24*30));
+        }
+    }
 
 }

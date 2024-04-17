@@ -1,17 +1,48 @@
 body {
-    background-color: #FAF6EA;
+    overflow-x: hidden;
+}
+@font-face {
+    font-family: "MonstroSolid";
+    src: url("/fonts/MonstroSolid.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "MyriadVariableConcept";
+    src: url("/fonts/MyriadVariableConcept.ttf") format("truetype");
+}
+
+
+.myriad{
+    font-family: "MyriadVariableConcept", sans-serif;
+    font-weight: 300;
+}
+
+.monstro{
+    font-family: "MonstroSolid", sans-serif;
+}
+
+h6 {
+    font-family: "MonstroSolid", sans-serif;
+    font-size: 20px;
+}
+.small_text{
+    font-size: 12px;
+    font-family: "MyriadVariableConcept", sans-serif;
 }
 
 .main_color {
-    color: #E4211F;
+    color: #22467d;
 }
 
 .second_color {
-    color: #FAF6EA;
+    color: #e2211c;
+}
+.container-fluid{
+    padding: 0 !important;
 }
 
 .background_main_color {
-    background-color: #E4211F;
+    background-color: #fabe55;
 }
 
 .background_second_color {
@@ -19,11 +50,12 @@ body {
 }
 
 a {
-    color: #1FA12E;
+    color: #fff;
+    text-decoration: none;
 }
 
 a:hover {
-    color: #00783f;
+    color: #234780;
 }
 
 
@@ -31,26 +63,54 @@ th {
     font-size: 14px;
 }
 
-
-.main_button {
-    background-color: #E4211F;
+.white_button {
+    background-color: #fff;
+    border-radius: 0;
     display: inline-block;
     padding: 10px 50px;
-    border-radius: 50px;
-    color: #ffffff;
+    color: #234780;
     text-decoration: none;
     font-size: 16px;
     text-align: center;
     cursor: pointer;
 }
+.white_button:hover {
+    background-color: #234780;
+    color: #fff;
+}
+
+.main_button {
+    background-color: #e2211c;
+    border-radius: 0;
+    display: inline-block;
+    padding: 10px 50px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+}
+
+.yellow_button {
+    background-color: #fabe55;
+    border-radius: 0;
+    display: inline-block;
+    padding: 10px 50px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+
 
 .main_button:hover {
-    background-color: #c40503;
-    color: lightgray;
+    background-color: #fff;
+    color: #234780;
 }
 
 .hr_custom{
-    border: 1px solid #c40503;
+    border: 1px solid #fff;
 }
 
 
@@ -59,25 +119,33 @@ th {
     color: #000;
 }
 
+
+
 /*Social Media Buttons */
+
+.but-fac{
+    display: block!important;
+    width: 100% !important;
+}
 .button-facebook {
     display: flex;
+    width: 100%;
     overflow: hidden;
-    border-radius: 50px;
+    border-radius: 0px;
 }
 
 .button-facebook .icon {
     padding: 10px 20px;
-    background-color: #4267B2;
-    border-radius: 50px 0 0 50px;
+    background-color: #142bb7;
+    border-radius:  0px;
 }
 
 .button-facebook .text {
     padding: 10px;
     background-color: #ffffff;
-    color: #000000;
-    border-radius: 0 50px 50px 0;
-    min-width: 250px;
+    color:#234780;
+    border-radius: 0px;
+    min-width: 800px;
 }
 
 .button-facebook img {
@@ -88,21 +156,21 @@ th {
 .button-google {
     display: flex;
     overflow: hidden;
-    border-radius: 50px;
+    border-radius: 0px;
 }
 
 .button-google .icon {
     padding: 10px 20px;
-    background-color: #C40503;
-    border-radius: 50px 0 0 50px;
+    background-color: #db1d19;
+    border-radius: 0px;
 }
 
 .button-google .text {
     padding: 10px;
     background-color: #ffffff;
-    color: #000000;
-    border-radius: 0 50px 50px 0;
-    min-width: 250px;
+    color:#234780;
+    border-radius: 0px;
+    min-width: 800px;
 }
 
 .button-google img {
@@ -121,9 +189,10 @@ th {
 }
 
 .navbar .navbar-nav .nav-link {
-    color: #000;
     font-size: 1.1em;
     padding: 0.5em 1em;
+    font-family: "MonstroSolid", sans-serif;
+    color:#22467d;
 }
 
 .navbar-dark .navbar-nav .nav-link.active {
@@ -143,21 +212,38 @@ th {
 }
 
 
+
 .custom-input {
-    border-radius: 50px;
+    border-radius: 0px;
+    font-family: "MyriadVariableConcept", sans-serif;
+    border: none;
+    color: #234780;
 }
+
+.custom-check-input {
+    border-radius: 0 !important;
+}
+
+.custom-check-input:checked {
+    background-color: #234780;
+}
+
+.form-check-label {
+    cursor: pointer;
+}
+
 
 .circle-my-account {
     background-color: #ffffff;
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
 }
 
 .product-bottom {
     margin-top: 20px;
-    border-radius: 15px;
     padding: 15px;
+    min-height: 144px;
 }
 
 .product-top {
@@ -195,14 +281,12 @@ th {
     flex: 1;
 }
 .header-row{
-    background:#ff0000;
-    border-radius:25px!important;
+    background:#3C5786;
     color:#fff;
     margin-bottom: 10px;
 }
 .data-row{
     background-color: #fff;
-    border-radius:25px!important;
     margin-bottom: 10px;
 }
 
@@ -216,4 +300,10 @@ th {
 .active-link {
     border-bottom: 6px solid #C40503;
 }
+
+.footer-links{
+    text-align: center;
+    margin-top: 100px;
+}
+
 

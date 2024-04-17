@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -17,7 +18,7 @@ class FacebookController extends Controller
         return Socialite::driver($driver)->redirect();
     }
 
-    public function handleProviderCallback($driver)
+    public function handleProviderCallback(Request $request, $driver)
     {
 
         try {
@@ -30,7 +31,6 @@ class FacebookController extends Controller
 
         if ($existingUser) {
             auth()->login($existingUser, true);
-            return 'yeiii';
         } else {
             $token = Str::random(16);
             while (User::where('token', $token)->exists()) {
@@ -39,8 +39,7 @@ class FacebookController extends Controller
             $newUser = new User;
             $newUser->provider_name = $driver;
             $newUser->provider_id = $user->getId();
-            $newUser->lastname = $user->getName();
-            $newUser->firstname = $user->getName();
+            $newUser->name = $user->getName();
             $newUser->email = $user->getEmail();
             $newUser->password = bcrypt(Str::random(16));
             // we set email_verified_at because the user's email is already veridied by social login portal
@@ -48,8 +47,17 @@ class FacebookController extends Controller
             $newUser->token = $token;
 
             $newUser->save();
+
+            $birthDay = new Address();
+            $birthDay->user_id = $newUser->id;
+            $birthDay->day = $request->cookie('day');
+            $birthDay->month = $request->cookie('month');
+            $birthDay->year = $request->cookie('year');
+            $birthDay->save();
+
+
             auth()->login($newUser, true);
         }
-        return redirect()->route('home');
+        return redirect()->route('account.index');
     }
 }

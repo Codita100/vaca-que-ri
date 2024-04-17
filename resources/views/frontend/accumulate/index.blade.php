@@ -1,7 +1,7 @@
 @extends('layouts.frontend_master')
 <!-- Content -->
 @section('content-frontend')
-    <section class="background_second_color my-5 py-5">
+    <section class="background_second_color py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

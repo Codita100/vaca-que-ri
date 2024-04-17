@@ -1,6 +1,31 @@
+body {
+    background-color: #fabe55;
+}
+
 .main_color {
     color: #E4211F;
 }
+
+
+@font-face {
+    font-family: "MonstroSolid";
+    src: url("/fonts/MonstroSolid.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "MyriadVariableConcept";
+    src: url("/fonts/MyriadVariableConcept.ttf") format("truetype");
+}
+
+.monstro{
+    font-family: "MonstroSolid", sans-serif;
+}
+
+
+.main_color {
+    color: #22467d;
+}
+
 
 a {
     color: #E4211F;

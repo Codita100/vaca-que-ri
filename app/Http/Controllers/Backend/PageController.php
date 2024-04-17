@@ -100,7 +100,7 @@ class PageController extends Controller
             $segment = config('app.locale');
             $page = Page::where('url', $url)->first();
             if ($page == "") {
-                return back()->with('error', 'general.Could not find the page at the moment');
+                return back()->with('error', 'Could not find the page at the moment');
             }
         } else {
             return view('frontend.pages.index')->with(

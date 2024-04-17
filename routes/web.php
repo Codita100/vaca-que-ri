@@ -27,12 +27,15 @@ use App\Http\Controllers\Backend\PageController;
 
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('participation.index');
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.user');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+
+Route::get('/age', [AuthController::class, 'age'])->name('age');
+Route::get('/age/submit', [AuthController::class, 'ageRescrition'])->name('age.submit');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'store'])->name('register.store');
 Route::get('/verify/{token}', [AuthController::class, 'verify']);
@@ -45,10 +48,11 @@ Route::post('/reset-password', [AuthController::class, 'updatePassword'])->name(
 //Facebook, Google Auth
 Route::get('/redirect/{driver}', [FacebookController::class, 'redirectToProvider'])->name('socialite.redirect');
 Route::get('{driver}/callback', [FacebookController::class, 'handleProviderCallback'])->name('socialite.callback');
+Route::get('/page/{url}', [PageController::class, 'displayPage'])->name('displayStaticPage');
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::group(['prefix' => '/frontend'], function () {
+    Route::group([], function () {
 
         Route::get('/cheltuie-puncte', [HomeController::class, 'cheltuie_puncte'])->name('chelutie.puncte');
         Route::get('/store/{id}', [OrderController::class, 'store'])->name('order.store');
@@ -75,8 +79,8 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/', [ConsumeController::class, 'store'])->name('consume.store');
         });
 
-        Route::get('/participation-information', [PageController::class, 'participationIndex'])->name('participation.index');
-        Route::get('/page/{url}', [PageController::class, 'displayPage'])->name('displayStaticPage');
+//        Route::get('/participation-information', [PageController::class, 'participationIndex'])->name('participation.index');
+
 
     });
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Backend\Address;
 use App\Models\Backend\Farmers;
 use App\Models\Backend\Order;
 use App\Models\Backend\UserDetails;
@@ -65,5 +66,10 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class, 'user_id', 'id');
+    }
+
+    public function address()
+    {
+        return $this->hasOne(Address::class, 'user_id', 'id');
     }
 }

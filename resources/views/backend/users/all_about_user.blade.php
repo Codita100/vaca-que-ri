@@ -2,13 +2,23 @@
 
 @section('content')
     <div class="container my-container">
-        <div>
-            <h4><strong><i class="menu-icon tf-icons ti ti-users"></i> User Details</strong></h4>
-            <ul>
-                <li>Name:: {{ $user->name }}</li>
-                <li>Email: {{ $user->email }}</li>
-                <li>Active: {{ $user->email_verified_at ? 'Yes' : 'No' }}</li>
-            </ul>
+        <div class="row">
+            <div class="col-md-6">
+                <h4><strong><i class="menu-icon tf-icons ti ti-users"></i> User Details</strong></h4>
+                <ul>
+                    <li>Name:: {{ $user->name }}</li>
+                    <li>Email: {{ $user->email }}</li>
+                    <li>Active: {{ $user->email_verified_at ? 'Yes' : 'No' }}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4><strong>Address</strong></h4>
+                <ul>
+                    <li>Address: {{ $user->address ? $user->address->address : '' }}</li>
+                    <li>City: {{ $user->address ? $user->address->city : '' }}</li>
+                    <li>Postal Code: {{ $user->address ? $user->address->postal : '' }} - {{ $user->address ? $user->address->code : '' }}</li>
+                </ul>
+            </div>
         </div>
         <div class="row">
             <div class="col-xl-3 col-md-3 col-3">

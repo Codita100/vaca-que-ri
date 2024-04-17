@@ -18,16 +18,13 @@ class CodesImport implements ToCollection, WithHeadingRow
         $codesNotImported = 0;
 
         foreach ($collection as $row) {
-
             $product = Product::find(1);
-
-                $new_code = new Cod;
-                $new_code->cod = $row['code'];
-                $new_code->product_id = $product->id;
-                $new_code->status = 0;
-                $new_code->save();
-                $codesImported++;
-
+            $new_code = new Cod;
+            $new_code->cod = $row['code'];
+            $new_code->product_id = $product->id;
+            $new_code->status = 0;
+            $new_code->save();
+            $codesImported++;
         }
 
         return redirect()->back()->with('warning', $codesImported . " codes imported, " . $codesNotImported . " codes not imported");

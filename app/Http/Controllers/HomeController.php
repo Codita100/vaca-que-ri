@@ -16,24 +16,16 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
+    public function index(Request $request)
     {
-        return redirect()->route('login');
+        if (!$request->cookie('age_verification')) {
+
+            return redirect()->route('age');
+        }
+
+        $prizes = ProductCatalog::get();
+        return view('frontend.participation.index', compact('prizes'));
     }
 
     public function introdu_cod()

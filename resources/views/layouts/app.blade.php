@@ -79,7 +79,7 @@
                             <script>
                                 document.write(new Date().getFullYear());
                             </script>
-                            , Voucheradama</a>
+                            , A Vaca Que Ri</a>
                         </div>
                         <div class="d-none d-lg-inline-block">
                             <a

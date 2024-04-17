@@ -30,13 +30,12 @@
 @include('layouts.errors')
 
 <div class="row">
-    <div class="col-md-5">
-        <img src="{{asset('images/bg-login.jpg')}}" class="img-fluid max-height-image"
-             style="object-fit: cover;">
+    <div class="col-md-6" style="padding-right: 0px; !important;">
+        <img src="{{asset('images/bg-login.jpg')}}" class="img-fluid">
     </div>
 
     <!-- Login -->
-    <div class="col-md-6 d-flex align-items-center">
+    <div class="col-md-6 d-flex align-items-center background_main_color">
 
             @yield('auth')
 
