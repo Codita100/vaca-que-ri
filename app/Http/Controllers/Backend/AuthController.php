@@ -165,7 +165,7 @@ class AuthController extends Controller
                 Log::info('Nu s-a trimis emailul pentru resetarea parolei');
             }
         }
-        return redirect()->route('login')->with('success', 'Vei primit un email cu instructiunile de resetare a parolei');
+        return redirect()->route('login')->with('success', 'Você receberá um e-mail com instruções de redefinição de senha');
     }
 
     public function resetPasswordPage($token)
@@ -184,9 +184,9 @@ class AuthController extends Controller
         $user = User::where('token', '=', $request->token)->first();
 
         $messages = [
-            'password.required' => 'Parola este obligatorie',
-            'password.min' => 'Parola trebuie sa contina minim 8 caractere',
-            'password.regex' => 'Parola trebuie sa contina 1 litera mare, 1 numar si 1 caracter special',
+            'password.required' => 'Senha requerida',
+            'password.min' => 'A senha deve conter pelo menos 8 caracteres',
+            'password.regex' => 'A senha deve conter 1 letra maiúscula, 1 número e 1 caractere especial',
         ];
 
         $validator = Validator::make($request->all(),
@@ -207,7 +207,7 @@ class AuthController extends Controller
         $user->email_verified_at = Carbon::now();
         $user->save();
 
-        return redirect()->route('login')->with('success', 'Parola ta a fost schimbata cu succes');
+        return redirect()->route('login')->with('success', 'Sua senha foi alterada com sucesso');
     }
 
     public function register(Request $request) {

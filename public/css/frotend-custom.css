@@ -180,6 +180,10 @@ th {
 
 /*Social Media Buttons END*/
 
+.navbar-brand{
+    padding-left: 120px;
+}
+
 .navbar-brand img {
     width: 80px;
 }
@@ -187,6 +191,7 @@ th {
 .navbar-nav {
     align-items: center;
 }
+
 
 .navbar .navbar-nav .nav-link {
     font-size: 1.1em;

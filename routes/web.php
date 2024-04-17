@@ -53,8 +53,6 @@ Route::get('/page/{url}', [PageController::class, 'displayPage'])->name('display
 Route::middleware(['auth'])->group(function () {
 
     Route::group([], function () {
-
-        Route::get('/cheltuie-puncte', [HomeController::class, 'cheltuie_puncte'])->name('chelutie.puncte');
         Route::get('/store/{id}', [OrderController::class, 'store'])->name('order.store');
 
 

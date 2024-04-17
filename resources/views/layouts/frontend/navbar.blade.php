@@ -1,5 +1,4 @@
 @auth()
-
     <style>
         @media only screen and (min-width: 768px) {
             .navbar-expand-md .navbar-collapse {
@@ -8,17 +7,36 @@
                 padding-left: 40px;
             }
         }
+        .navbar-toggler{
+            background-color: #2d3748;
+
+        }
+
+        .custom-toggler .navbar-toggler-icon {
+            background-image: url(
+            "data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+        }
+
     </style>
 
     <nav class="navbar navbar-expand-md front-nav">
         <div class="container-fluid">
-            <a class="navbar-brand d-md-none" href="#">
-                <img src="{{asset('images/Logo2.png')}}" alt="" class="img-fluid">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+
+            <div class="row justify-content-center">
+                <a class="navbar-brand d-md-none justify-content-center align-items-center" href="#">
+                    <img src="{{asset('images/Logo2.png')}}" alt="" class="img-fluid" style="width: 175px">
+                </a>
+            </div>
+
+            <div class="row align-items-start">
+                <div class="col">
+                    <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </div>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
@@ -60,6 +78,7 @@
         </div>
     </nav>
 @endauth
+
 @guest()
 <style>
     @media only screen and (min-width: 768px) {
