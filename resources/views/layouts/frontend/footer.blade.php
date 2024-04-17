@@ -4,7 +4,7 @@
             <div class="col-md-8">
 
                 <div class="d-md-inline">
-                    <a href="/page/termos-e-condicoes">TERMOS E CONDIÇÕES</a>
+                    <a href="/page/termos-e-condicoes">TERMOS E CONDIÇÕESaaaaaaaaaaaaaaaaaa</a>
                 </div>
                 <div class="d-md-inline  ms-md-5">
                     <a href="/page/politica-de-provacitade">POLÍTICA DE PRIVACIDADE</a>
