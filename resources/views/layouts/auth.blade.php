@@ -25,19 +25,22 @@
 
 <body>
 @include('layouts.errors')
+<section class="px-3">
+    <div class="container-fluid">
+        <div class="row">
 
-<div class="row" >
+            <!-- Login -->
+            <div class="col d-flex align-items-center background_main_color order-md-2">
+                @yield('auth')
+            </div>
 
-    <!-- Login -->
-    <div class="col d-flex align-items-center background_main_color order-md-2">
-        @yield('auth')
+            <div class="col-md-5 p-0  order-md-1">
+                <img src="{{asset('images/bg-login.jpg')}}" class="img-fluid h-100 d-md-block d-none" alt="Imagine">
+                <img src="{{asset('images/bg-login.jpg')}}" class="img-fluid d-md-none" alt="Imagine">
+            </div>
+        </div>
     </div>
-
-    <div class="col-md-5 p-0  order-md-1">
-        <img src="{{asset('images/bg-login.jpg')}}" class="img-fluid h-100 d-md-block d-none" alt="Imagine">
-        <img src="{{asset('images/bg-login.jpg')}}" class="img-fluid d-md-none" alt="Imagine">
-    </div>
-</div>
+</section>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
