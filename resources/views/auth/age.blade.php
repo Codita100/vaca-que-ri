@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 <!-- Content -->
 @section('auth')
-    <div class="container">
+    <div class="container px-3">
         <div class="row">
             <div class="col-md-9 mx-auto">
                 @include('layouts.frontend.top_auth')

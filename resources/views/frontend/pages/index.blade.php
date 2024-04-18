@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-md-2"></div>
             </div>
-            <div class="row my-5 px-3">
+            <div class="row my-5 px-5">
 
                 <div class="col-md-2 text-md-end d-none d-md-block col align-self-center">
                     <img src="{{asset('images/graphics/regulamento_graphics1.png')}}" class="img-fluid"
