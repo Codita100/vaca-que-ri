@@ -1,51 +1,44 @@
 <?php
 
-namespace App\Mail\Backend;
+namespace App\Mail\Frontend;
 
 use App\Models\Backend\Email;
-use App\Models\Backend\Farmers;
-use App\Models\Backend\Order;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ViewUserStatusConsentChangedEmail extends Mailable
+class ResetEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($order, $email)
+    public function __construct($id, $email)
     {
-        $this->order = $order;
+        $this->id = $id;
         $this->email = $email;
     }
+
     public function build()
     {
-        $order = Order::find($this->order->id);
-        $farmer = Farmers::where('id', $order->farmer_id)->first();
+        $user = User::find($this->id);
+
         $mail = Email::where('name', '=', $this->email)->first();
 
-        if (!$mail) {
-            return;
-        }
-
         $replace = [
-            '[order]' => $order->id,
-            '[farm]' => $farmer->farm_name,
-            '[username]' => $farmer->agent->firstname . ' ' . $farmer->agent->lastname ,
+            '[username]' => $user->name,
+            '[token]' => $user->token
         ];
 
 
+        //replace the content with tags from the above
         $content = $mail->description;
         foreach ($replace as $key => $value) {
             $content = str_replace($key, $value, $content);
         }
+
 
         return $this->from(env('MAIL_FROM_ADDRESS'),env('MAIL_FROM_NAME'))
             ->subject($mail->subject)

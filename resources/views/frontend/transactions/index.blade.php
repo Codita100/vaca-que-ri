@@ -1,6 +1,7 @@
 @extends('layouts.frontend_master')
 <!-- Content -->
 @section('content-frontend')
+
     <section class="background_second_color pt-5">
         <div class="container-fluid">
             <div class="row">
@@ -75,6 +76,7 @@
     </section>
 
     @include('layouts.frontend.footer2')
-
-
 @endsection
+
+
+

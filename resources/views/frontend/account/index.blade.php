@@ -1,6 +1,7 @@
 @extends('layouts.frontend_master')
 
 @section('content-frontend')
+    @include('frontend.modals.order_modal')
     <section class="background_second_color pt-5">
         <div class="container-fluid">
             <div class="row">
@@ -104,7 +105,7 @@
                                                 PONTOS</h4></div>
 
                                         <div><a class="btn main_button d-grid"
-                                                href="{{ route('order.store', $product->id) }}">QUERO JÁ!</a></div>
+                                                href="{{ route('consume.store', $product->id) }}">QUERO JÁ!</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -121,4 +122,14 @@
             </div>
         </div>
     @include('layouts.frontend.footer')
+
+        @if(session('success_order'))
+            <script>
+                $(document).ready(function(){
+                    $('#order_modal').modal('show');
+                });
+            </script>
+        @endif
+
 @endsection
+

@@ -8,7 +8,7 @@
         }
     }
 </style>
-    <section class="background_second_color py-5">
+    <section class="background_second_color py-5 px-3">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2"></div>
@@ -61,7 +61,7 @@
 
 
 
-    <section style="background-color: #fff" class="py-md-5">
+    <section style="background-color: #fff" class="py-md-5 px-3">
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-md-2 align-self-start d-none d-md-block" style="margin-top: -100px; max-width: 220px">
@@ -170,7 +170,7 @@
                                                 PONTOS</h4></div>
                                         @auth()
                                             <div><a class="btn main_button d-grid"
-                                                    href="{{ route('order.store', $product->id) }}">QUERO JÁ!</a></div>
+                                                    href="{{ route('consume.store', $product->id) }}">QUERO JÁ!</a></div>
                                         @endauth
                                     </div>
 

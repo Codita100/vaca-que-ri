@@ -83,9 +83,9 @@ class MyAccountController extends Controller
             'accept_terms.required' => 'Você deve aceitar o regulamento da campanha.',
             'accept_terms.accepted' => 'Você deve aceitar o regulamento da campanha.',
             'postal.required' => 'O campo código postal é obrigatório.',
-            'postal.regex' => 'O formato do código postal está incorreto. Deve conter exatamente 3 dígitos.',
+            'postal.regex' => 'O formato do código postal está incorreto. Deve conter exatamente 4 dígitos.',
             'code.required' => 'O campo código é obrigatório.',
-            'code.regex' => 'O formato do código está incorreto. Deve conter exatamente 4 dígitos.',
+            'code.regex' => 'O formato do código está incorreto. Deve conter exatamente 3 dígitos.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -94,7 +94,7 @@ class MyAccountController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $birthDay = Carbon::createFromFormat('d/m/Y', $request->day.'/'.$request->month.'/'.$request->year);
+        $birthDay = Carbon::createFromFormat('d/m/Y', $request->day . '/' . $request->month . '/' . $request->year);
         $thisDay = Carbon::now();
 
         $age = $birthDay->diffInYears($thisDay);
@@ -105,7 +105,7 @@ class MyAccountController extends Controller
         $user = Auth::user();
 
         $address = Address::where('user_id', $user->id)->first();
-        if (!$address){
+        if (!$address) {
             $address = new Address();
         }
         $address->user_id = $user->id;
@@ -118,13 +118,14 @@ class MyAccountController extends Controller
         $address->city = $request->input('city');
         $address->postal = $request->input('postal');
         $address->code = $request->input('code');
+        $address->accept_privacy =  $request->input('accept_privacy') ? 1 : 0;
+        $address->accept_terms = $request->input('accept_terms') ? 1 : 0;
         $address->save();
 
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
 
-
-        return redirect()->back()->with('success', 'Address saved successfully!');
+        return redirect()->back()->with('success', 'Endereço salvo com sucesso!');
     }
 }

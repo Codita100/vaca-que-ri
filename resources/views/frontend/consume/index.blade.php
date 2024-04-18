@@ -16,7 +16,7 @@
                 @foreach($products as $product)
                     <div class="col-md-3 mb-4">
                         <div class="card">
-                            <a href="{{route('chelutie.puncte.acum', $product->id)}}"> <img
+                            <a href="{{route('consume.store', $product->id)}}"> <img
                                     src="{{asset('images/products_catalogue/'. $product->photo) }}" class="card-img-top"
                                     alt="{{ $product->name }}"></a>
                             <div class="card-body">

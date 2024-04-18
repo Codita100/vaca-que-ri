@@ -46,12 +46,10 @@ class OrderController extends Controller
         $orderColumnIndex = $request->input('order.0.column');
         $order = $columns[$orderColumnIndex] ?? 'created_at';
 
-        // Query pentru a obține datele
         $query = Order::leftjoin('addresses', 'orders.user_id', 'addresses.user_id')
             ->select(['orders.*']);
 
 
-        // Aplică filtrarea pentru căutare
         $search = $request->input('search.value');
         if (!empty($search)) {
             $query->where(function ($subquery) use ($search) {
@@ -64,10 +62,9 @@ class OrderController extends Controller
 
         $query->orderBy($order, $dir);
 
-        // Limitează și offsetează rezultatele
         $orders = $query->offset($start)->limit($limit)->get();
 
-        // Construiește array-ul de date pentru DataTables
+
         $data = [];
         foreach ($orders as $key => $order) {
             $nestedData['id'] = $order->id;
@@ -76,8 +73,8 @@ class OrderController extends Controller
             $nestedData['product_catalog'] = $order->productCatalog->name;
             $nestedData['status'] = ($order->status == 0) ? 'Comanda plasata' : 'Comanda finalizata';
             $actions = '';
-            $actions = '<a class="btn btn-primary waves-effect waves-light m-1" href="' . route('order.edit', $order->token) . '" title="Ai voie?"> Edit </a>';
-            $actions .= '<a class="btn btn-warning waves-effect waves-light m-1" href="' . route('order.delete', $order->token) . '" > Delete order </a>';
+            $actions = '<a class="btn btn-primary waves-effect waves-light m-1" href="' . route('order.edit', $order->token) . '"> Edit </a>';
+
 
             $nestedData['action'] = $actions;
 
@@ -139,47 +136,5 @@ class OrderController extends Controller
         return redirect()->back()->with('error', 'Order not found');
     }
 
-    public function store($id)
-    {
-        $product_catalog = ProductCatalog::findOrFail($id);
-        $user = Auth::user();
 
-        $total_points = UserPointsIn::where('user_id', $user->id)->sum('accumulated_points') - UserPointsOut::where('user_id', $user->id)->sum('consumed_points');
-
-        //check 1 - Number of points
-        if ($total_points >= $product_catalog->points) {
-
-            //check 2 - Address
-            $address = Address::where('user_id', $user->id)->first();
-            if (!$address) {
-                return redirect()->route('address.index')->with('warning', 'Please insert the address.');
-            }
-
-            $product_catalog->stock = $product_catalog->stock - 1; // stock
-            $product_catalog->save();
-
-            $points = new UserPointsOut();
-            $points->user_id = Auth::id();
-            $points->consumed_points = $product_catalog->points;
-            $points->product_catalogs_id = $product_catalog->id;
-            $points->save();
-
-            do {
-                $token = Str::random(10);
-            } while (Order::where('token', $token)->exists());
-
-            $order = new Order();
-            $order->user_id = Auth::id();
-            $order->token = $token;
-            $order->product_catalogs_id = $product_catalog->id;
-            $order->save();
-
-            UserTransactionService::insertOutTransaction(Auth::id(), $points->id);
-
-            return redirect()->back()->with('success', 'Ai cumparat ce trebuie');
-
-        } else {
-            return redirect()->back()->with('error', 'Nu ai suficiente puncte pentru a cumpăra acest produs.');
-        }
-    }
 }

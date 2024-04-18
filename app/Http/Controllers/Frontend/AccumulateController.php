@@ -9,6 +9,7 @@ use App\Models\Backend\UserPointsIn;
 use App\Services\UserTransactionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AccumulateController extends Controller
 {
@@ -18,6 +19,26 @@ class AccumulateController extends Controller
 
     public function store(Request $request)
     {
+        $messages = [
+            'cod.required' => 'O campo do código é obrigatório.',
+            'cod.string' => 'O campo do código deve ser uma string.',
+            'cod.max' => 'O campo do código não pode ter mais de :max caracteres.',
+        ];
+
+
+        $validator = Validator::make($request->all(), [
+            'cod' => 'required|string|max:255',
+        ], $messages);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
+        $codul = strip_tags($request->cod);
+
+
         $codul = $request->cod;
         $exist = Cod::where('cod', $codul)->first();
         if ($exist) {
@@ -34,10 +55,10 @@ class AccumulateController extends Controller
 
                 UserTransactionService::insertTransaction(Auth::id(), $points->id);
 
-                return redirect()->route('transactions.index')->with('success', 'O código foi salvo com sucesso');
+                return redirect()->back()->with('success_modal', 'O código foi salvo com sucesso');
             } else {
 
-                return redirect()->back()->with('warning', 'O código está incorreto.');
+                return redirect()->back()->with('warning_modal', 'O código está incorreto.');
             }
         } else {
             $points = new UserPointsIn();
@@ -48,7 +69,7 @@ class AccumulateController extends Controller
             $points->save();
 
             UserTransactionService::insertTransaction(Auth::id(), $points->id);
-            return redirect()->back()->with('warning', 'O código está incorreto.');
+            return redirect()->back()->with('warning_modal', 'O código está incorreto.');
         }
     }
 }

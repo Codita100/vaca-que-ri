@@ -53,8 +53,6 @@ Route::get('/page/{url}', [PageController::class, 'displayPage'])->name('display
 Route::middleware(['auth'])->group(function () {
 
     Route::group([], function () {
-        Route::get('/store/{id}', [OrderController::class, 'store'])->name('order.store');
-
 
         Route::group(['prefix' => '/my-account'], function () {
             Route::get('/', [MyAccountController::class, 'index'])->name('account.index');
@@ -74,7 +72,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::group(['prefix' => '/consume-points'], function () {
             Route::get('/', [ConsumeController::class, 'index'])->name('consume.index');
-            Route::post('/', [ConsumeController::class, 'store'])->name('consume.store');
+            Route::get('/{id}', [ConsumeController::class, 'store'])->name('consume.store');
         });
 
 //        Route::get('/participation-information', [PageController::class, 'participationIndex'])->name('participation.index');

@@ -2,7 +2,7 @@
 
 <!-- Content -->
 @section('content-frontend')
-    <section class="background_second_color py-5">
+    <section class="background_second_color py-5 px-3">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <input type="text" class="form-control custom-input @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') ? old('email') : ($user ? $user->email : '') }}" placeholder="{{ $user ? '' : 'Email*' }}">
+                            <input type="text" class="form-control custom-input @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') ? old('email') : ($user ? $user->email : '') }}" placeholder="{{ $user ? '' : 'Email*' }}" readonly>
 
                             @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -84,7 +84,7 @@
                                     <input type="text"  maxlength="3" class="form-control custom-input" name="code" value="{{ old('code') ? old('code') : ($user->address ? $user->address->code : '') }}" placeholder="000">
                                 </div>
                                 <div class="col">
-                                    <input type="text"  class="form-control custom-input" name="city" value="{{ old('postal_code') ? old('postal_code') : ($user->address ? $user->address->city : '') }}" placeholder="Localidade" >
+                                    <input type="text"  class="form-control custom-input" name="city" value="{{ old('city') ? old('city') : ($user->address ? $user->address->city : '') }}" placeholder="Localidade" >
                                 </div>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                         <div class="mb-3 form-check">
                             <input type="checkbox" name="accept_privacy" id="accept_privacy"
                                    class="form-check-input custom-check-input @error('accept_privacy') is-invalid @enderror"
-                                   required @if($user->accept_privacy) checked @endif>
+                                   required @if($user->address->accept_privacy) checked @endif>
                             <label class="form-check-label main_color myriad" for="accept_privacy" style="font-size: 12px" >LI E ACEITO O TRATAMENTO DOS MEUS DADOS PESSOAIS CONFORME ACIMA DESCRITO.</label>
                             @error('accept_privacy')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -105,7 +105,7 @@
                         <div class="mb-3 form-check">
                             <input type="checkbox" name="accept_terms" id="accept_terms"
                                    class="form-check-input custom-check-input @error('accept_terms') is-invalid @enderror"
-                                   required @if($user->accept_terms) checked @endif>
+                                   required @if($user->address->accept_terms) checked @endif>
                             <label class="form-check-label main_color myriad" for="accept_terms" style="font-size: 12px">LI E ACEITO O REGULAMENTO DA CAMPANHA.</label>
                             @error('accept_terms')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -119,10 +119,11 @@
                     </form>
                 </div>
 
-                <div class="col-md-3 d-none d-md-block align-self-end">
-                    <img src="{{asset('images/graphics/address_graphic2.png')}}" class="img-fluid">
+                <div class="col-md-3 d-none d-md-block align-self-center text-end">
+                    <img src="{{asset('images/graphics/address_graphic2.png')}}" class="img-fluid" style="width: 80%">
                 </div>
             </div>
         </div>
     </section>
+    @include('layouts.frontend.footer2')
 @endsection

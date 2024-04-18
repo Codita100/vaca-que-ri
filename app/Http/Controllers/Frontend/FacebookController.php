@@ -45,8 +45,9 @@ class FacebookController extends Controller
             // we set email_verified_at because the user's email is already veridied by social login portal
             $newUser->email_verified_at = now();
             $newUser->token = $token;
-
             $newUser->save();
+
+            $newUser->assignRole('user');
 
             $birthDay = new Address();
             $birthDay->user_id = $newUser->id;

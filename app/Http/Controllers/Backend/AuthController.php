@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Mail\Backend\ResetEmail;
 use App\Mail\Frontend\RegisterEmail;
+use App\Mail\Frontend\ResetEmail;
 use App\Models\Backend\Address;
-use App\Models\Backend\Campaign;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,8 +20,13 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    public function index()
+    public function index(Request $request)
+
     {
+        if (!$request->cookie('age_verification')) {
+            return redirect()->route('age')->with('error', 'Você deve ter pelo menos 18 anos para se registrar.');
+        }
+
         return view('auth.login');
     }
 
@@ -211,6 +215,10 @@ class AuthController extends Controller
     }
 
     public function register(Request $request) {
+        if (!$request->cookie('age_verification')) {
+            return redirect()->route('age')->with('error', 'Você deve ter pelo menos 18 anos para se registrar.');
+        }
+
         return view('auth.register');
     }
 
@@ -224,7 +232,7 @@ class AuthController extends Controller
         $rules = [
             'day' => 'required|numeric|min:1|max:31',
             'month' => 'required|numeric|min:1|max:12',
-            'year' => 'required|numeric|max:2006',
+            'year' => 'required|numeric|max:2006|min:1900',
         ];
 
         $messages = [
@@ -238,7 +246,9 @@ class AuthController extends Controller
             'month.max' => 'O campo mês não pode ser maior que :max.',
             'year.required' => 'O campo ano é obrigatório.',
             'year.numeric' => 'O campo ano deve ser um número.',
-            'year.min' => 'Você deve ter pelo menos 18 anos para se inscrever.',
+            'year.max' => 'O campo ano não pode ser maior que :max.',
+            'year.min' => 'Você deve ter pelo menos :min anos para se inscrever.',
+
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
