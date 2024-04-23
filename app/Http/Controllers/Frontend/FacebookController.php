@@ -24,9 +24,11 @@ class FacebookController extends Controller
         try {
             $user = Socialite::driver($driver)->user();
 
-        } catch (\Exception $e) {
+        } catch (GuzzleHttp\Exception\ClientException $e) {
+            dd($e->response);
             return redirect()->route('login');
         }
+
         $existingUser = User::where('email', $user->getEmail())->first();
 
         if ($existingUser) {
