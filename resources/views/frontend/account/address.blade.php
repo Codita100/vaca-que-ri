@@ -95,7 +95,7 @@
                         <div class="mb-3 form-check">
                             <input type="checkbox" name="accept_privacy" id="accept_privacy"
                                    class="form-check-input custom-check-input @error('accept_privacy') is-invalid @enderror"
-                                   required @if($user->address->accept_privacy) checked @endif>
+                                   required @if($user->accept_privacy) checked @endif>
                             <label class="form-check-label main_color myriad" for="accept_privacy" style="font-size: 12px" >LI E ACEITO O TRATAMENTO DOS MEUS DADOS PESSOAIS CONFORME ACIMA DESCRITO.</label>
                             @error('accept_privacy')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -105,7 +105,7 @@
                         <div class="mb-3 form-check">
                             <input type="checkbox" name="accept_terms" id="accept_terms"
                                    class="form-check-input custom-check-input @error('accept_terms') is-invalid @enderror"
-                                   required @if($user->address->accept_terms) checked @endif>
+                                   required @if($user->accept_terms) checked @endif>
                             <label class="form-check-label main_color myriad" for="accept_terms" style="font-size: 12px">LI E ACEITO O REGULAMENTO DA CAMPANHA.</label>
                             @error('accept_terms')
                             <div class="invalid-feedback">{{ $message }}</div>

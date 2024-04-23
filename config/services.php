@@ -36,7 +36,7 @@ return [
     'google' => [
         'client_id'     => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect'      => "https://lavacaquerie.createdev.ro/google/callback",
+        'redirect'      => "/google/callback",
     ],
 
     'facebook' => [
