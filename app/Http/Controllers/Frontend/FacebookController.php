@@ -22,7 +22,7 @@ class FacebookController extends Controller
     {
 
         try {
-            $user = Socialite::driver($driver)->stateless()->user();
+            $user = Socialite::driver($driver)->stateless()->scopes(['profile', 'email'])->user();
 
         } catch (\Exception  $e) {
             return redirect()->route('login')->withError('Something went wrong! '.$e->getMessage());
@@ -46,6 +46,8 @@ class FacebookController extends Controller
             // we set email_verified_at because the user's email is already veridied by social login portal
             $newUser->email_verified_at = now();
             $newUser->token = $token;
+            $newUser->accept_privacy = 0;
+            $newUser->accept_terms = 0;
             $newUser->save();
 
             $newUser->assignRole('user');
@@ -55,8 +57,7 @@ class FacebookController extends Controller
             $birthDay->day = $request->cookie('day');
             $birthDay->month = $request->cookie('month');
             $birthDay->year = $request->cookie('year');
-            $birthDay->accept_privacy = 0;
-            $birthDay->accept_terms = 0;
+
             $birthDay->save();
 
 
