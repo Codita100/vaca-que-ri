@@ -15,7 +15,7 @@ class FacebookController extends Controller
 {
     public function redirectToProvider($driver)
     {
-        return Socialite::driver($driver)->redirect();
+        return Socialite::driver($driver)->stateless()->redirect();
     }
 
     public function handleProviderCallback(Request $request, $driver)
@@ -23,6 +23,7 @@ class FacebookController extends Controller
 
         try {
             $user = Socialite::driver($driver)->stateless()->user();
+
 
         } catch (\Throwable $th) {
             return redirect()->route('login')->withError('Something went wrong! '.$th->getMessage());
