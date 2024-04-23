@@ -24,9 +24,8 @@ class FacebookController extends Controller
         try {
             $user = Socialite::driver($driver)->stateless()->user();
 
-
-        } catch (\Throwable $th) {
-            return redirect()->route('login')->withError('Something went wrong! '.$th->getMessage());
+        } catch (\Exception  $e) {
+            return redirect()->route('login')->withError('Something went wrong! '.$e->getMessage());
         }
 
         $existingUser = User::where('email', $user->getEmail())->first();
