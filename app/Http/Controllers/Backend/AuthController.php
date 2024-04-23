@@ -114,6 +114,8 @@ class AuthController extends Controller
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->accept_privacy = 1;
+        $user->accept_terms = 1;
         $user->password = bcrypt($request->input('password'));
 
         $user->token = $token;
@@ -124,8 +126,7 @@ class AuthController extends Controller
         $birthDay->day = $request->cookie('day');
         $birthDay->month = $request->cookie('month');
         $birthDay->year = $request->cookie('year');
-        $birthDay->accept_privacy = 1;
-        $birthDay->accept_terms = 1;
+
         $birthDay->save();
 
 
