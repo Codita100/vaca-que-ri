@@ -344,7 +344,8 @@
                                     <tr>
                                         <td style="padding:0 50px 10px; width:100%;font-size:10px;font-family:sans-serif;mso-height-rule:exactly;line-height:18px;text-align:center;color:#404040;"
                                             class="me">
-
+                                            <a href="#"><img src="{{asset('images/mail/banner2.jpg')}}" width="600" alt="A Vaca che ri"
+                                                             border="0" style="width: 100%; max-width: 600px; height: auto;"></a>
                                             <br>
                                         </td>
                                     </tr>

@@ -126,6 +126,6 @@ class MyAccountController extends Controller
         $user->email = $request->email;
         $user->save();
 
-        return redirect()->back()->with('success', 'Endereço salvo com sucesso!');
+        return redirect()->route('account.index')->with('success', 'Endereço salvo com sucesso!');
     }
 }

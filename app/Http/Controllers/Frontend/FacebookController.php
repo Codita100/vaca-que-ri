@@ -54,6 +54,8 @@ class FacebookController extends Controller
             $birthDay->day = $request->cookie('day');
             $birthDay->month = $request->cookie('month');
             $birthDay->year = $request->cookie('year');
+            $birthDay->accept_privacy = 0;
+            $birthDay->accept_terms = 0;
             $birthDay->save();
 
 

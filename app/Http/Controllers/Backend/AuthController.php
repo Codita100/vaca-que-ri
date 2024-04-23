@@ -124,6 +124,8 @@ class AuthController extends Controller
         $birthDay->day = $request->cookie('day');
         $birthDay->month = $request->cookie('month');
         $birthDay->year = $request->cookie('year');
+        $birthDay->accept_privacy = 1;
+        $birthDay->accept_terms = 1;
         $birthDay->save();
 
 
