@@ -15,7 +15,7 @@ class FacebookController extends Controller
 {
     public function redirectToProvider($driver)
     {
-        return Socialite::driver($driver)->stateless()->redirect();
+        return Socialite::driver($driver)->stateless()->scopes(['email'])->user();
     }
 
     public function handleProviderCallback(Request $request, $driver)
