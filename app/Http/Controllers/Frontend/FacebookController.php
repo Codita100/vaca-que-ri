@@ -22,11 +22,10 @@ class FacebookController extends Controller
     {
 
         try {
-            $user = Socialite::driver($driver)->user();
+            $user = Socialite::driver($driver)->stateless()->user();
 
-        } catch (GuzzleHttp\Exception\ClientException $e) {
-            dd($e->response);
-            return redirect()->route('login');
+        } catch (\Throwable $th) {
+            return redirect()->route('login')->withError('Something went wrong! '.$th->getMessage());
         }
 
         $existingUser = User::where('email', $user->getEmail())->first();
