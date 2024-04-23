@@ -118,12 +118,13 @@ class MyAccountController extends Controller
         $address->city = $request->input('city');
         $address->postal = $request->input('postal');
         $address->code = $request->input('code');
-        $address->accept_privacy =  $request->input('accept_privacy') ? 1 : 0;
-        $address->accept_terms = $request->input('accept_terms') ? 1 : 0;
+
         $address->save();
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->accept_privacy =  $request->input('accept_privacy') ? 1 : 0;
+        $user->accept_terms = $request->input('accept_terms') ? 1 : 0;
         $user->save();
 
         return redirect()->route('account.index')->with('success', 'Endereço salvo com sucesso!');
