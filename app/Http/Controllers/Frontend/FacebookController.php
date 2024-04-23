@@ -15,14 +15,14 @@ class FacebookController extends Controller
 {
     public function redirectToProvider($driver)
     {
-        return Socialite::driver($driver)->stateless()->scopes(['email'])->redirect();
+        return Socialite::driver($driver)->stateless()->scopes(['email', 'openid'])->redirect();
     }
 
     public function handleProviderCallback(Request $request, $driver)
     {
 
         try {
-            $user = Socialite::driver($driver)->stateless()->scopes(['email'])->user();
+            $user = Socialite::driver($driver)->stateless()->scopes(['email', 'openid'])->user();
             dd($user);
 
         } catch (\Exception  $e) {
