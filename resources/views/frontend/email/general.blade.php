@@ -282,67 +282,12 @@
                     <!-- Email Body : END -->
                     <!-- Email Footer : BEGIN -->
                     <tr>
-                        <td bgcolor="#1FA12E" valign="middle"
+                        <td  valign="middle"
                             style="background-position:center !important;background-size:cover !important;">
                             <div>
-                                <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td align="center" valign="top" style="padding:30px 62px 0px;">
-                                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                                                <tr>
-                                                    <td class="stack-column-center" style="text-align: left;">
-                                                        <table cellspacing="0" cellpadding="0" border="0"
-                                                               style="text-align: left;">
-                                                            <tr>
-                                                                <td dir="rtl" valign="top"
-                                                                    style="font-family:sans-serif;font-size:15px;mso-height-rule:exactly;line-height:20px;color:#555555; text-align:left; padding: 20px 0px 0px 20px ;"
-                                                                    class="center-on-narrow">
-
-                                                                </td>
-                                                            </tr>
-
-                                                        </table>
-                                                    </td>
-                                                    <td class="stack-column-center">
-                                                        <table cellspacing="0" cellpadding="0" border="0">
-                                                            <tr>
-                                                                <td>
-
-                                                                    <a href="" target="_blank">
-                                                                        <h4 class="text-light">
-                                                                            <i class="fab fa-facebook-f"></i></h4>
-                                                                    </a>
-
-                                                                </td>
-
-                                                                <td>
-
-                                                                    <a href="" target="_blank">
-                                                                        <h4 class="text-light">
-                                                                            <i class="fab fa-facebook-f"></i></h4>
-                                                                    </a>
-
-                                                                </td>
-                                                                <td>
-
-                                                                    <a href="#" target="_blank">
-                                                                        <h4 class="text-light">
-                                                                            <i class="fab fa-facebook-f"></i></h4></a>
-
-                                                                </td>
-
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-
                                 <table align="center" width="600px" class="email-container">
                                     <tr>
-                                        <td style="padding-top:50px; width:100%;mso-height-rule:exactly;text-align:center;">
+                                        <td style="width:100%;mso-height-rule:exactly;text-align:center;">
                                             <a href="#"><img src="{{asset('images/mail/banner2.jpg')}}" width="600" alt="A Vaca che ri"
                                                              border="0" style="width: 100%; max-width: 600px; height: auto;"></a>
                                             <br>
