@@ -26,7 +26,7 @@ use App\Http\Controllers\Frontend\ConsumeController;
 use App\Http\Controllers\Backend\PageController;
 
 Auth::routes();
-
+//https://github.com/lcmaquino/googleoauth2
 Route::get('/', [HomeController::class, 'index'])->name('participation.index');
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
