@@ -62,7 +62,7 @@ class ConsumeController extends Controller
             UserTransactionService::insertOutTransaction(Auth::id(), $points->id);
 
             try {
-                Mail::to($user->email)->send(new OrderEmail($user->id, $order,  "Order"));
+                Mail::to($user->email)->send(new OrderEmail($user->id, $order,  "Order Confirmation"));
             } catch (\Exception $e) {
                 Log::info('Nu s-a trimis emailul pentru comanda');
             }
