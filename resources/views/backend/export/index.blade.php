@@ -29,5 +29,18 @@
                 <button type="submit" class="btn btn main_button">Export</button>
             </form>
         </div>
+
+        <div class="col-md-4 p-3" style="background-color: #fff">
+            <form method="get" action="{{ route('export.codes') }}">
+                @csrf
+                <div class="row">
+                    <div class="col-md-12">
+                        <h6>Codes</h6>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn main_button">Export</button>
+            </form>
+        </div>
     </div>
 @endsection

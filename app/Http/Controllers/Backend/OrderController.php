@@ -71,7 +71,7 @@ class OrderController extends Controller
             $nestedData['created_at'] = $order->created_at->format('Y-m-d H:i:s');
             $nestedData['user'] = $order->user->name;
             $nestedData['product_catalog'] = $order->productCatalog->name;
-            $nestedData['status'] = ($order->status == 0) ? 'Comanda plasata' : 'Comanda finalizata';
+            $nestedData['status'] = ($order->status == 0) ? 'Order' : 'Comanda finalizata';
             $actions = '';
             $actions = '<a class="btn btn-primary waves-effect waves-light m-1" href="' . route('order.edit', $order->token) . '"> Edit </a>';
 

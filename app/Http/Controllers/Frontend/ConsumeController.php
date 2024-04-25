@@ -12,6 +12,7 @@ use App\Models\Backend\UserPointsOut;
 use App\Services\UserTransactionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -26,22 +27,44 @@ class ConsumeController extends Controller
 
     public function store($id)
     {
-        $product_catalog = ProductCatalog::findOrFail($id);
-        $user = Auth::user();
 
+        $product_catalog = ProductCatalog::findOrFail($id);
+        //check 1
+        if ($product_catalog->stock <= 0) {
+            return back()->with('error', 'O produto não está mais em estoque');
+        }
+        $user = Auth::user();
         $total_points = UserPointsIn::where('user_id', $user->id)->sum('accumulated_points') - UserPointsOut::where('user_id', $user->id)->sum('consumed_points');
 
-        //check 1 - Number of points
+        //check 2 - Number of points
         if ($total_points >= $product_catalog->points) {
 
-            //check 2 - Address
+            //check 3 - Address
             $address = Address::where('user_id', $user->id)->first();
             if (!$address->address) {
                 return redirect()->route('address.index')->with('warning', 'Por favor, insira o endereço.');
             }
 
+
+            //first mark in status
+            $number_of_codes = $product_catalog->points;
+            $ins_lines = UserPointsIn::where('user_id', $user->id)
+                ->where('status', 0)
+                ->whereNotNull('product_id')
+                ->whereNotNull('code_id')
+                ->orderBy('created_at', 'asc')
+                ->limit($number_of_codes)
+                ->get();
+
+            foreach ($ins_lines as $item) {
+                $item->status = 1;
+                $item->product_catalog_id = $product_catalog->id;
+                $item->save();
+            }
+
             $product_catalog->stock = $product_catalog->stock - 1; // stock
             $product_catalog->save();
+
 
             $points = new UserPointsOut();
             $points->user_id = Auth::id();
@@ -61,8 +84,9 @@ class ConsumeController extends Controller
 
             UserTransactionService::insertOutTransaction(Auth::id(), $points->id);
 
+
             try {
-                Mail::to($user->email)->send(new OrderEmail($user->id, $order,  "Order Confirmation"));
+                Mail::to($user->email)->send(new OrderEmail($user->id, $order, "Order Confirmation"));
             } catch (\Exception $e) {
                 Log::info('Nu s-a trimis emailul pentru comanda');
             }
@@ -70,6 +94,7 @@ class ConsumeController extends Controller
             return redirect()->back()->with('success_order', 'Você comprou o que era necessário.');
 
         } else {
+            session()->forget('order_token');
             return redirect()->back()->with('error', 'Você não tem pontos suficientes.');
         }
     }

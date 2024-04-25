@@ -25,7 +25,6 @@ class AccumulateController extends Controller
             'cod.max' => 'O campo do código não pode ter mais de :max caracteres.',
         ];
 
-
         $validator = Validator::make($request->all(), [
             'cod' => 'required|string|max:255',
         ], $messages);
@@ -35,12 +34,10 @@ class AccumulateController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-
         $codul = strip_tags($request->cod);
 
-
-        $codul = $request->cod;
         $exist = Cod::where('cod', $codul)->first();
+
         if ($exist) {
             if ($exist->status == 0) {
                 $exist->status = 1;
@@ -48,6 +45,7 @@ class AccumulateController extends Controller
 
                 $points = new UserPointsIn();
                 $points->user_id = Auth::id();
+                $points->code_id = $exist->id;
                 $points->code = $codul;
                 $points->accumulated_points = $exist->product->points;
                 $points->product_id = $exist->product->id;
@@ -57,6 +55,14 @@ class AccumulateController extends Controller
 
                 return redirect()->back()->with('success_modal', 'O código foi salvo com sucesso');
             } else {
+                $points = new UserPointsIn();
+                $points->user_id = Auth::id();
+                $points->code = $codul;
+                $points->accumulated_points = 0;
+                $points->product_id =null;
+                $points->save();
+
+                UserTransactionService::insertTransaction(Auth::id(), $points->id);
 
                 return redirect()->back()->with('warning_modal', 'O código está incorreto.');
             }

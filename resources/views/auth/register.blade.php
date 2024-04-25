@@ -54,8 +54,8 @@
                                 <input type="checkbox" name="accept_privacy" id="accept_privacy"
                                        class="form-check-input custom-check-input @error('accept_privacy') is-invalid @enderror"
                                        required>
-                                <label class="form-check-label text-white myriad" for="accept_privacy">Accept Termenii și
-                                    Condițiile</label>
+                                <label class="form-check-label text-white myriad" for="accept_privacy">Eu aceito os Termos e
+                                    Condições</label>
                                 @error('accept_privacy')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -65,8 +65,8 @@
                                 <input type="checkbox" name="accept_terms" id="accept_terms"
                                        class="form-check-input custom-check-input @error('accept_terms') is-invalid @enderror"
                                        required>
-                                <label class="form-check-label text-white myriad" for="accept_terms">Accept Politica de
-                                    Confidențialitate</label>
+                                <label class="form-check-label text-white myriad" for="accept_terms">Aceito a Política de
+                                    PRIVACIDADE</label>
                                 @error('accept_terms')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

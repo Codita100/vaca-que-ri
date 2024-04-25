@@ -45,7 +45,7 @@ class MyAccountController extends Controller
             'month' => 'required|numeric|min:1|max:12',
             'year' => 'required|numeric|max:2006',
             'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:255',
+            'phone' => 'required|numeric',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'postal' => 'required|regex:/^[0-9]{4}/',
@@ -73,7 +73,7 @@ class MyAccountController extends Controller
             'email.email' => 'O campo email deve ser um endereço de email válido.',
             'email.max' => 'O campo email não pode ter mais de :max caracteres.',
             'phone.required' => 'O campo telefone é obrigatório.',
-            'phone.string' => 'O campo telefone deve ser uma string.',
+            'phone.numeric' => 'O campo dia deve ser um número.',
             'phone.max' => 'O campo telefone não pode ter mais de :max caracteres.',
             'address.required' => 'O campo morada é obrigatório.',
             'address.string' => 'O campo morada deve ser uma string.',
@@ -109,24 +109,24 @@ class MyAccountController extends Controller
             $address = new Address();
         }
         $address->user_id = $user->id;
-        $address->phone = $request->phone;
-        $address->day = $request->input('day');
-        $address->month = $request->input('month');
-        $address->year = $request->input('year');
+        $address->phone = strip_tags($request->phone);
+        $address->day = strip_tags($request->input('day'));
+        $address->month = strip_tags($request->input('month'));
+        $address->year = strip_tags($request->input('year'));
 
-        $address->address = $request->input('address');
-        $address->city = $request->input('city');
-        $address->postal = $request->input('postal');
-        $address->code = $request->input('code');
+        $address->address = strip_tags($request->input('address'));
+        $address->city = strip_tags($request->input('city'));
+        $address->postal = strip_tags($request->input('postal'));
+        $address->code = strip_tags($request->input('code'));
 
         $address->save();
 
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $user->name = strip_tags($request->name);
+        $user->email = strip_tags($request->email);
         $user->accept_privacy =  $request->input('accept_privacy') ? 1 : 0;
         $user->accept_terms = $request->input('accept_terms') ? 1 : 0;
         $user->save();
 
-        return redirect()->route('account.index')->with('success', 'Endereço salvo com sucesso!');
+        return redirect()->route('account.index')->with('success', 'Endereço salvo com sucesso! Agora você pode encomendar seu produto favorito');
     }
 }

@@ -22,8 +22,6 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->integer('postal')->nullable();
             $table->integer('code')->nullable();
-            $table->integer('accept_privacy');
-            $table->integer('accept_terms');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -26,6 +26,10 @@ class OrdersExport implements FromCollection, WithHeadings
                 'email' => $order->email,
                 'product ordered' => $order->product_name,
                 'date' => $order->created_at,
+                'address' => $order->address,
+                'city' => $order->city,
+                'postal code' => $order->postal . '-' . $order->code,
+                'phone' => $order->phone,
             ];
         });
     }
@@ -38,6 +42,10 @@ class OrdersExport implements FromCollection, WithHeadings
             'email',
             'product ordered',
             'date',
+            'address',
+            'city',
+            'postal code',
+            'phone',
         ];
 
 

@@ -15,8 +15,7 @@ class PointsController extends Controller
 {
     public function index()
     {
-        $users = User::with('points_in')->get();
-        return view('backend.points.index', compact('users'));
+        return view('backend.points.index');
     }
 
     public function view($id)
@@ -40,9 +39,10 @@ class PointsController extends Controller
                 0 => 'id',
                 1 => 'user',
                 2 => 'email',
-                3 => 'points',
+                3 => 'total_accumulated_points',
+                4 => 'total_consumed_points',
+                5 => 'remaining_points',
             );
-
 
             $limit = $request->input('length');
             $start = $request->input('start');
@@ -50,8 +50,7 @@ class PointsController extends Controller
             $orderColumnIndex = $request->input('order.0.column');
             $order = $columns[$orderColumnIndex] ?? 'created_at';
 
-            $query = User::with('points_in')->select('users.*');
-
+            $query = User::with(['points_in', 'points_out'])->select('users.*');
 
             $search = $request->input('search.value');
             if (!empty($search)) {
@@ -66,16 +65,19 @@ class PointsController extends Controller
             $query->orderBy($order, $dir);
             $users = $query->offset($start)->limit($limit)->get();
 
-            // Construiește array-ul de date pentru DataTables
+
             $data = [];
             foreach ($users as $key => $user) {
-                $accumulatedPoints = $user->points_in->sum('accumulated_points');
-                $consumedPoints = $user->points_out->sum('consumed_points');
-                $totalPoints = $accumulatedPoints - $consumedPoints;
+                $total_accumulated_points = $user->points_in->sum('accumulated_points');
+                $total_consumed_points = $user->points_out->sum('consumed_points');
+                $remaining_points = $total_accumulated_points - $total_consumed_points;
 
                 $nestedData['id'] = $user->id;
                 $nestedData['user'] = $user->name;
-                $nestedData['points'] = $totalPoints;
+
+                $nestedData['remaining_points'] = $remaining_points;
+                $nestedData['accumulated_points'] = $total_accumulated_points;
+                $nestedData['consumed_points'] = $total_consumed_points;
                 $nestedData['email'] = $user->email;
                 $data[] = $nestedData;
             }
@@ -92,4 +94,5 @@ class PointsController extends Controller
 
         return view('backend.points.index');
     }
+
 }

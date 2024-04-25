@@ -3,35 +3,40 @@
 @section('content')
     <section>
         <div class="container my-container">
-            <div><h4><strong>  <i class="menu-icon tf-icons ti ti-key"></i> Codes</strong></h4>
+            <div><h4><strong> <i class="menu-icon tf-icons ti ti-key"></i> Codes</strong></h4>
             </div>
-
-            <div class="col-md-12 my-4">
+            <div class="row d-flex align-items-center">
                 <form enctype="multipart/form-data" method="post" action="{{ route('codes.import') }}">
                     @csrf
-                    <div class="d-flex align-items-center">
-                        <div class="d-flex align-items-center">
-                            <input class="form-control" type="file" id="formFile" name="file">
-                            <button type="submit" class="btn main_button mx-5" name="submit">Save</button>
-                        </div>
-                        <div>
-                            <a href="{{ route('download.excel.codes') }}">Import Model</a>
-                        </div>
+                    <div class="col-md-4 my-4">
+                        <input class="form-control" type="file" id="formFile" name="file">
+                    </div>
+
+                    <div class="col-md-4 my-4">
+                        <select class="form-select" name="product">
+                            @foreach($products as $prod)
+                                <option value="{{$prod->id}}">{{$prod->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-4 my-4">
+                        <button type="submit" class="btn main_button mx-5" name="submit">Save</button>
                     </div>
                 </form>
             </div>
-            <div class="row my-5">
-                <table id="myTable" class="display"
-                       style="width:100%; background-color: #ffffff; color: black;">
-                    <thead style="background-color: #2d3748; color: white !important;">
-                    <th>#</th>
-                    <th>Code</th>
-                    <th>Product</th>
-                    <th>Status</th>
-                    </thead>
-                </table>
-            </div>
         </div>
+        <div class="row my-5">
+            <table id="myTable" class="display"
+                   style="width:100%; background-color: #ffffff; color: black;">
+                <thead style="background-color: #2d3748; color: white !important;">
+                <th>#</th>
+                <th>Code</th>
+                <th>Product</th>
+                <th>Status</th>
+                </thead>
+            </table>
+        </div>
+
     </section>
 
 @endsection

@@ -33,7 +33,6 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.user');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
 Route::get('/age', [AuthController::class, 'age'])->name('age');
 Route::get('/age/submit', [AuthController::class, 'ageRescrition'])->name('age.submit');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -142,9 +141,6 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/update/{id}', [MailController::class, 'update'])->name('email.update');
         });
 
-        //Exporturi
-        Route::group(['prefix' => '/exports', 'middleware' => ['permission:exports']], function () {
-        });
 
         Route::group(['prefix' => '/pages', 'middleware' => ['permission:pages']], function () {
             Route::get('/', [PageController::class, 'index'])->name('pages.index');
@@ -159,6 +155,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [ExportController::class, 'index'])->name('export');
             Route::get('/export-points', [ExportController::class, 'exportPoints'])->name('export.points');
             Route::get('/export-orders', [ExportController::class, 'exportOrders'])->name('export.orders');
+            Route::get('/export-codes', [ExportController::class, 'exportCodes'])->name('export.codes');
 
         });
 

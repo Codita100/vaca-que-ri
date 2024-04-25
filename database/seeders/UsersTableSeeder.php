@@ -19,20 +19,5 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('Teamor123'),
             'token' => Str::random(16),
         ]);
-
-        \App\Models\User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'cristinab@createdirect.ro',
-            'password' => bcrypt('CrisProject'),
-            'token' => Str::random(16),
-        ]);
-
-
-        \App\Models\User::factory()->create([
-            'name' => 'Test',
-            'email' => 'test@test.com',
-            'password' => bcrypt('Teamor123'),
-            'token' => Str::random(16),
-        ]);
     }
 }

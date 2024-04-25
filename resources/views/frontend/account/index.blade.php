@@ -104,8 +104,8 @@
                                         <div class="my-3"><h4 class="second_color myriad">{{$product->points}}
                                                 PONTOS</h4></div>
 
-                                        <div><a class="btn main_button d-grid"
-                                                href="{{ route('consume.store', $product->id) }}">QUERO JÁ!</a></div>
+                                        <div><a id="queroJaButton" class="btn main_button d-grid"
+                                                href="{{ $product->stock == 0 ? '#' : route('consume.store', $product->id) }}" >QUERO JÁ!</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -121,6 +121,14 @@
                 <h5 class="text-white">(Imagens meramente ilustrativas)</h5>
             </div>
         </div>
+
+        <script>
+            $(document).ready(function() {
+                $('#queroJaButton').click(function() {
+                    $(this).addClass('disabled').attr('disabled', 'disabled');
+                });
+            });
+        </script>
     @include('layouts.frontend.footer')
 
         @if(session('success_order'))

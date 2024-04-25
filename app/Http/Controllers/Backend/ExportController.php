@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\CodesExport;
 use App\Exports\OrdersExport;
 use App\Exports\PointsExport;
 use App\Exports\UserExport;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Campaign;
+use App\Models\Backend\Cod;
 use App\Models\Backend\Order;
 use App\Models\Backend\UserPointsIn;
 use App\Models\Backend\UserPointsOut;
@@ -40,7 +42,7 @@ class ExportController extends Controller
         }
 
         if ($users->isNotEmpty()) {
-            return Excel::download(new PointsExport($users), 'Raport_' . time() . '.xlsx');
+            return Excel::download(new PointsExport($users), 'Points_' . time() . '.xlsx');
         } else {
             return redirect()->back()->with('warning', 'Nu există raport în perioada selectată');
         }
@@ -54,12 +56,32 @@ class ExportController extends Controller
 
         $orders = Order::join('users', 'orders.user_id', 'users.id')
             ->join('product_catalogs', 'orders.product_catalogs_id', 'product_catalogs.id')
-            ->leftjoin('addresses', 'orders.id', 'addresses.order_id')
-            ->select('users.id', 'users.name', 'users.email', 'product_catalogs.name as product_name', 'orders.created_at')
+            ->leftjoin('addresses', 'users.id', 'addresses.user_id')
+            ->select('users.id', 'users.name', 'users.email', 'product_catalogs.name as product_name', 'orders.created_at', 'addresses.phone', 'addresses.address', 'addresses.city', 'addresses.postal', 'addresses.code')
             ->get();
 
         if ($orders->isNotEmpty()) {
             return Excel::download(new OrdersExport($orders), 'Orders_' . time() . '.xlsx');
+        } else {
+            return redirect()->back()->with('warning', 'Nu există raport în perioada selectată');
+        }
+    }
+
+    public function exportCodes(Request $request)
+    {
+        if (!Auth::user()->hasRole('super_admin')) {
+            return redirect()->back()->with('warning', 'Nu aveți permisiunea necesară pentru a accesa această funcționalitate.');
+        }
+
+        $codes = Cod::join('user_points_ins', 'cod.id', 'user_points_ins.code_id')
+            ->leftjoin('product_catalogs', 'user_points_ins.product_catalog_id', 'product_catalogs.id')
+            ->join('users', 'user_points_ins.user_id', 'users.id')
+            ->select('cod.cod', 'cod.status', 'cod.product_id', 'user_points_ins.user_id', 'product_catalogs.name as catalog_product', 'users.name as userName')
+            ->get();
+
+
+        if ($codes->isNotEmpty()) {
+            return Excel::download(new CodesExport($codes), 'Codes' . time() . '.xlsx');
         } else {
             return redirect()->back()->with('warning', 'Nu există raport în perioada selectată');
         }

@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('user_points_ins', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->constrained();
+            $table->integer('code_id')->nullable();
             $table->string('code');
             $table->integer('accumulated_points')->default(0);
             $table->unsignedBigInteger('product_id')->nullable();
+            $table->integer('product_catalog_id')->nullable();
+            $table->integer('status')->default(0);
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products');
+
 
         });
     }

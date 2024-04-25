@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Imports\CodesImport;
 use App\Models\Backend\Cod;
+use App\Models\Backend\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
@@ -13,7 +14,8 @@ class CodesController extends Controller
 {
     public function index()
     {
-              return view('backend.codes.index');
+        $products = Product::all();
+              return view('backend.codes.index', compact('products'));
     }
 
     public function getCodes(Request $request)
@@ -102,17 +104,20 @@ class CodesController extends Controller
 
     public function import(Request $request)
     {
+
         set_time_limit(1200);
-        if ($request['file'] == "") {
-            return back()->with('error', 'Incarca un fisier excel');
+        if (!$request->hasFile('file')) {
+            return back()->with('error', 'Încarcă un fișier Excel');
         }
+
+        $product_id = $request->input('product');
 
         $notification = array(
             'message' => 'Fisier uploadat cu success',
             'alert-type' => 'success'
         );
 
-        Excel::import(new CodesImport(), $request->file);
+        Excel::import(new CodesImport($product_id), $request->file('file'));
         return redirect()->back()->with($notification);
     }
 }
