@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Imports\SalesForce;
+use App\Models\Backend\Address;
 use App\Models\Backend\Campaign;
 use App\Models\Backend\Order;
 use App\Models\Backend\UserTransaction;
@@ -19,7 +20,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('created_at', 'desc')->get();
-        return view('backend.users.index', compact('users', ));
+        return view('backend.users.index', compact('users',));
     }
 
     public function getAllUsers(Request $request)
@@ -70,8 +71,9 @@ class UserController extends Controller
             $nestedData['roles'] = $roles;
 
             $actions = '';
-            $actions ='<a class="btn btn-primary waves-effect waves-light m-1" href="' . route('users.impersonate', $user->id) . '" title="Ai voie?"> Impresonate </a>';
-            $actions .='<a class="btn btn-warning waves-effect waves-light m-1" href="' . route('users.all.about', $user->id) . '" > View </a>';
+            $actions = '<a class="btn btn-primary waves-effect waves-light m-1" href="' . route('users.impersonate', $user->id) . '" title="Ai voie?"> Impresonate </a>';
+            $actions .= '<a class="btn btn-warning waves-effect waves-light m-1" href="' . route('users.all.about', $user->id) . '" > View </a>';
+            $actions .= '<a class="btn btn-primary waves-effect waves-light m-1" href="' . route('users.edit', $user->id) . '" > Edit </a>';
 
             $nestedData['action'] = $actions;
             $data[] = $nestedData;
@@ -88,27 +90,42 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $salesForce = User::find($id);
-        return view('backend.users.edit', compact('salesForce'));
+        $user = User::find($id);
+        return view('backend.users.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($id),
-            ],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
         ]);
 
-        $salesForce = User::find($id);
-        $salesForce->firstname = $request->firstname;
-        $salesForce->lastname = $request->lastname;
-        $salesForce->email = $request->email;
-        $salesForce->save();
+        $user = User::find($id);
+        $address = $user->address;
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if ($request->has('active')) {
+            $user->email_verified_at = now();
+        } else {
+            $user->email_verified_at = null;
+        }
+        $user->save();
+
+        if ($address) {
+            $address->address = $request->address;
+            $address->phone = $request->phone;
+            $address->city = $request->city;
+            $address->postal = $request->postal;
+            $address->code = $request->code;
+            $address->save();
+        }
 
         return redirect()->route('users.index')->with('success', 'User updated successfully');
     }
+
 
     public function import(Request $request)
     {
@@ -143,7 +160,7 @@ class UserController extends Controller
         $consumedPoints = $user->points_out->sum('consumed_points');
         $totalPoints = $accumulatedPoints - $consumedPoints;
 
-        $catalog_orders = Order::where('user_id',$user->id)->get();
+        $catalog_orders = Order::where('user_id', $user->id)->get();
         return view('backend.users.all_about_user', compact('user', 'orders', 'totalPoints', 'catalog_orders'));
     }
 }

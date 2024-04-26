@@ -86,6 +86,8 @@ Route::middleware(['auth'])->group(function () {
         Route::group(['prefix' => '/users', 'middleware' => ['permission:users']], function () {
             Route::get('/', [UserController::class, 'index'])->name('users.index');
             Route::get('/get-all-users', [UserController::class, 'getAllUsers']);
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+            Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
             Route::get('/impersonate/{id}', [UserController::class, 'impersonate'])->name('users.impersonate');
             Route::get('/all-about/{id}', [UserController::class, 'allAbout'])->name('users.all.about');
         });
