@@ -19,6 +19,7 @@ body {
 
 .monstro{
     font-family: "MonstroSolid", sans-serif;
+    letter-spacing: 0.5px;
 }
 
 h6 {

@@ -16,9 +16,9 @@
                         <h3 class="second_color text-center monstro second_color"><strong>O MEU PERFIL</strong></h3>
                     </div>
                     <div class="circle-my-account mx-auto text-center d-flex justify-content-center align-items-center">
-                        <div>
-                            <h1 class="monstro">{{$totalPoints}}</h1>
-                            <p>PONTOS ACUMULADOS</p>
+                        <div class="py-2">
+                            <h1 class="monstro main_color">{{$totalPoints}}</h1>
+                            <p class="myriad main_color" style="line-height: 14px">PONTOS ACUMULADOS</p>
                         </div>
                     </div>
 
