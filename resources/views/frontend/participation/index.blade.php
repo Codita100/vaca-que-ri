@@ -104,7 +104,7 @@
 
 
     <section class="background_main_color p-5">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row text-center my-5">
                 <h3 class="text-white monstro"><strong>PRÉMIOS DISPONÍVEIS</strong></h3>
             </div>

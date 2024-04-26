@@ -23,7 +23,6 @@ class FacebookController extends Controller
 
         try {
             $user = Socialite::driver($driver)->stateless()->setScopes(['email','openid'])->user();
-//            dd($user);
 
         } catch (\Exception  $e) {
             return redirect()->route('login')->withError('Something went wrong! '.$e->getMessage());
