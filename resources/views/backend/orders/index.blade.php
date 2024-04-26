@@ -24,7 +24,8 @@
                     <th>Date</th>
                     <th>User</th>
                     <th>Product</th>
-                    <th>Status</th>
+                    <th>Points</th>
+
                     </thead>
 
                 </table>
@@ -50,7 +51,8 @@
                     {data: 'created_at', name: 'created_at'},
                     {data: 'user', name: 'user'},
                     {data: 'product_catalog', name: 'product_catalog'},
-                    {data: 'status', name: 'status'},
+                    {data: 'points', name: 'points'},
+
                 ],
 
                 bStateSave: true,

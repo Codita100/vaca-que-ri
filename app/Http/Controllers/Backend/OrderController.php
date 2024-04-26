@@ -34,7 +34,7 @@ class OrderController extends Controller
             1 => 'created_at',
             2 => 'user',
             3 => 'product_catalog',
-            4 => 'status',
+            4 => 'points',
 
         );
 
@@ -69,7 +69,8 @@ class OrderController extends Controller
             $nestedData['created_at'] = $order->created_at->format('Y-m-d H:i:s');
             $nestedData['user'] = $order->user->name;
             $nestedData['product_catalog'] = $order->productCatalog->name;
-            $nestedData['status'] = ($order->status == 0) ? 'Order' : 'Comanda finalizata';
+            $nestedData['points'] = $order->productCatalog->points;
+
 
             $data[] = $nestedData;
         }
