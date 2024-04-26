@@ -9,7 +9,7 @@
     <section>
         <div class="container my-container">
             <div class="row mb-5">
-                <h4><strong><i class="menu-icon tf-icons ti ti-star"></i> Points</strong></h4>
+                <h4><strong><i class="menu-icon tf-icons ti ti-star"></i> Points - <span class="text-danger">Active Users</span></strong></h4>
                 <div class="table-responsive">
                     <table id="example" class="display"
                            style="width:100%; background-color: #ffffff; color: black;">

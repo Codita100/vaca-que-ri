@@ -50,7 +50,7 @@ class PointsController extends Controller
             $orderColumnIndex = $request->input('order.0.column');
             $order = $columns[$orderColumnIndex] ?? 'created_at';
 
-            $query = User::with(['points_in', 'points_out'])->select('users.*');
+            $query = User::with(['points_in', 'points_out'])->select('users.*')->whereNotNull('email_verified_at');
 
             $search = $request->input('search.value');
             if (!empty($search)) {

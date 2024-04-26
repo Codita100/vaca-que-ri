@@ -27,18 +27,17 @@ class ConsumeController extends Controller
 
     public function store($id)
     {
-
         $product_catalog = ProductCatalog::findOrFail($id);
         //check 1
         if ($product_catalog->stock <= 0) {
             return back()->with('error', 'O produto não está mais em estoque');
         }
         $user = Auth::user();
+
         $total_points = UserPointsIn::where('user_id', $user->id)->sum('accumulated_points') - UserPointsOut::where('user_id', $user->id)->sum('consumed_points');
 
         //check 2 - Number of points
         if ($total_points >= $product_catalog->points) {
-
             //check 3 - Address
             $address = Address::where('user_id', $user->id)->first();
             if (!$address->address) {
@@ -48,19 +47,16 @@ class ConsumeController extends Controller
 
             //first mark in status
             $number_of_codes = $product_catalog->points;
-            $ins_lines = UserPointsIn::where('user_id', $user->id)
+            $updatedLines = UserPointsIn::where('user_id', $user->id)
                 ->where('status', 0)
                 ->whereNotNull('product_id')
                 ->whereNotNull('code_id')
                 ->orderBy('created_at', 'asc')
                 ->limit($number_of_codes)
-                ->get();
-
-            foreach ($ins_lines as $item) {
-                $item->status = 1;
-                $item->product_catalog_id = $product_catalog->id;
-                $item->save();
-            }
+                ->update([
+                    'status' => 1,
+                    'product_catalog_id' => $product_catalog->id
+                ]);
 
             $product_catalog->stock = $product_catalog->stock - 1; // stock
             $product_catalog->save();

@@ -79,6 +79,10 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+//        Cookie::queue(Cookie::forget('age_verification'));
+//        Cookie::queue(Cookie::forget('day'));
+//        Cookie::queue(Cookie::forget('month'));
+//        Cookie::queue(Cookie::forget('year'));
 
         return redirect('/')->with('success', 'Você foi despejado');
     }
@@ -110,7 +114,6 @@ class AuthController extends Controller
         } while (User::where('token', $token)->exists());
 
 
-
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
@@ -128,7 +131,6 @@ class AuthController extends Controller
         $birthDay->year = $request->cookie('year');
 
         $birthDay->save();
-
 
 
         $user->assignRole('user');
@@ -217,7 +219,8 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Sua senha foi alterada com sucesso');
     }
 
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         if (!$request->cookie('age_verification')) {
             return redirect()->route('age')->with('error', 'Você deve ter pelo menos 18 anos para se registrar.');
         }
@@ -225,7 +228,8 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function age(){
+    public function age()
+    {
         return view('auth.age');
     }
 
@@ -260,7 +264,7 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $birthDay = Carbon::createFromFormat('d/m/Y', $request->day.'/'.$request->month.'/'.$request->year);
+        $birthDay = Carbon::createFromFormat('d/m/Y', $request->day . '/' . $request->month . '/' . $request->year);
         $thisDay = Carbon::now();
 
         $age = $birthDay->diffInYears($thisDay);
@@ -268,10 +272,10 @@ class AuthController extends Controller
             return redirect()->back()->with('error', 'Você deve ter pelo menos 18 anos para se inscrever.');
         } else {
 
-            return redirect()->route('participation.index')->withCookie(Cookie::make('age_verification', true, 60*24*30))
-                ->withCookie(Cookie::make('day', $request->day, 60*24*30))
-                ->withCookie(Cookie::make('month', $request->month, 60*24*30))
-                ->withCookie(Cookie::make('year', $request->year, 60*24*30));
+            return redirect()->route('participation.index')->withCookie(Cookie::make('age_verification', true, 60 * 24 * 30))
+                ->withCookie(Cookie::make('day', $request->day, 60 * 24 * 30))
+                ->withCookie(Cookie::make('month', $request->month, 60 * 24 * 30))
+                ->withCookie(Cookie::make('year', $request->year, 60 * 24 * 30));
         }
     }
 

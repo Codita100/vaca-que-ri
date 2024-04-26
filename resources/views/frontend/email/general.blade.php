@@ -288,13 +288,10 @@
                                 <table align="center" width="600px" class="email-container">
                                     <tr>
                                         <td style="width:100%;mso-height-rule:exactly;text-align:center;">
-                                            <a href="#"><img src="{{asset('images/mail/banner2.jpg')}}" width="600" alt="A Vaca che ri"
+                                            <a href="#"><img src="{{asset('images/mail/banner2.png')}}" width="600" alt="A Vaca che ri"
                                                              border="0" style="width: 100%; max-width: 600px; height: auto;"></a>
                                             <br>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="height:20px;"></td>
                                     </tr>
                                 </table>
                                 <!-- Email Footer : END -->

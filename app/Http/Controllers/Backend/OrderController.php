@@ -22,9 +22,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
-        $totalOrders = Order::all();
-        return view('backend.orders.index', compact('totalOrders'));
+        return view('backend.orders.index');
 
     }
 
@@ -37,7 +35,7 @@ class OrderController extends Controller
             2 => 'user',
             3 => 'product_catalog',
             4 => 'status',
-            5 => 'action',
+
         );
 
         $limit = $request->input('length');
@@ -72,11 +70,6 @@ class OrderController extends Controller
             $nestedData['user'] = $order->user->name;
             $nestedData['product_catalog'] = $order->productCatalog->name;
             $nestedData['status'] = ($order->status == 0) ? 'Order' : 'Comanda finalizata';
-            $actions = '';
-            $actions = '<a class="btn btn-primary waves-effect waves-light m-1" href="' . route('order.edit', $order->token) . '"> Edit </a>';
-
-
-            $nestedData['action'] = $actions;
 
             $data[] = $nestedData;
         }

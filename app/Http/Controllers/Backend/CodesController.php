@@ -15,7 +15,7 @@ class CodesController extends Controller
     public function index()
     {
         $products = Product::all();
-              return view('backend.codes.index', compact('products'));
+        return view('backend.codes.index', compact('products'));
     }
 
     public function getCodes(Request $request)
@@ -35,7 +35,7 @@ class CodesController extends Controller
 
 
         $query = Cod::join('products', 'cod.product_id', '=', 'products.id')
-            ->select('cod.id', 'cod.cod', 'cod.product_id',  'products.name as product_name',  'cod.status');
+            ->select('cod.id', 'cod.cod', 'cod.product_id', 'products.name as product_name', 'cod.status');
 
         $search = $request->input('search.value');
         if (!empty($search)) {
@@ -97,7 +97,8 @@ class CodesController extends Controller
         return response()->json($json_data);
     }
 
-    public function downloadModelCodes(){
+    public function downloadModelCodes()
+    {
         $modelExcelPath = public_path('excel/model_codes.xlsx');
         return response()->download($modelExcelPath, 'model_codes.xlsx');
     }

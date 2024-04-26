@@ -25,7 +25,6 @@
                     <th>User</th>
                     <th>Product</th>
                     <th>Status</th>
-                    <th>Action</th>
                     </thead>
 
                 </table>
@@ -52,7 +51,6 @@
                     {data: 'user', name: 'user'},
                     {data: 'product_catalog', name: 'product_catalog'},
                     {data: 'status', name: 'status'},
-                    {data: 'action', name: 'action'}
                 ],
 
                 bStateSave: true,
