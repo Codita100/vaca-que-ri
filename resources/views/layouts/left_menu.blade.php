@@ -1,7 +1,8 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo py-5">
         <a href="{{route('participation.index')}}" class="app-brand-link">
-            <span class="app-brand-text demo menu-text fw-bold"> <img src="{{asset('images/Logo.png')}}" class="img-fluid" width="120px"/></span>
+            <span class="app-brand-text demo menu-text fw-bold"> <img src="{{asset('images/Logo.png')}}"
+                                                                      class="img-fluid" width="120px"/></span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -21,14 +22,13 @@
             </a>
         </li>
 
-        @role('super_admin')
+
         <li class="menu-item @if(request()->routeIs('points.index')) active @endif">
             <a href="{{ route('points.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-star"></i>
                 <div data-i18n="Points">Points</div>
             </a>
         </li>
-        @endrole
 
 
         <li class="menu-item @if(request()->routeIs('order.index')) active @endif">
@@ -41,38 +41,33 @@
         <hr>
 
 
-        @role('super_admin')
         <li class="menu-item @if(request()->routeIs('codes.index')) active @endif">
             <a href="{{ route('codes.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-key"></i>
                 <div data-i18n="Codes">Codes</div>
             </a>
         </li>
-        @endrole
 
 
-        @role('super_admin')
         <li class="menu-item @if(request()->routeIs('products.index')) active @endif">
             <a href="{{ route('products.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-package"></i>
                 <div data-i18n="Products">Products</div>
             </a>
         </li>
-        @endrole
 
-        @role('super_admin')
+
         <li class="menu-item @if(request()->routeIs('products.catalogue.index')) active @endif">
             <a href="{{ route('products.catalogue.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-book"></i>
                 <div data-i18n="Catalogue">Catalogue</div>
             </a>
         </li>
-        @endrole
+
 
         <hr>
 
 
-        @role('super_admin')
         <li class="menu-item @if(request()->routeIs('export')) active @endif">
             <a href="{{ route('export') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-arrow-down"></i>
@@ -93,7 +88,9 @@
                 <div data-i18n="Pages">Pages</div>
             </a>
         </li>
-        @endrole
+
+        @role('super_admin')
+
 
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -118,6 +115,7 @@
                 </li>
             </ul>
         </li>
+        @endrole
 
     </ul>
 </aside>

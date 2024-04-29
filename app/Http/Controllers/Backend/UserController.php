@@ -71,7 +71,11 @@ class UserController extends Controller
             $nestedData['roles'] = $roles;
 
             $actions = '';
-            $actions = '<a class="btn btn-primary waves-effect waves-light m-1" href="' . route('users.impersonate', $user->id) . '" title="Ai voie?"> Impresonate </a>';
+            if (Auth::user()->hasRole('super_admin')) {
+                $actions .= '<a class="btn btn-primary waves-effect waves-light m-1" href="' . route('users.impersonate', $user->id) . '" title="Ai voie?"> Impersonate </a>';
+            }
+
+
             $actions .= '<a class="btn btn-warning waves-effect waves-light m-1" href="' . route('users.all.about', $user->id) . '" > View </a>';
             $actions .= '<a class="btn btn-primary waves-effect waves-light m-1" href="' . route('users.edit', $user->id) . '" > Edit </a>';
 
