@@ -99,7 +99,7 @@
                                     </div>
 
                                     <div class="product-bottom background_second_color text-center main_color">
-                                        <div><h4 class="monstro second_color"><strong> {{$product->name}} </strong>
+                                        <div style="min-height: 58px"><h4 class="monstro second_color"><strong> {{$product->name}} </strong>
                                             </h4></div>
                                         <div class="my-3"><h4 class="second_color myriad">{{$product->points}}
                                                 PONTOS</h4></div>
