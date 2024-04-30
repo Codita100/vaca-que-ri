@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class MyAccountController extends Controller
@@ -21,7 +22,7 @@ class MyAccountController extends Controller
         $consumedPoints = $user->points_out->sum('consumed_points');
         $totalPoints = $accumulatedPoints - $consumedPoints;
         $prizes = ProductCatalog::with('multiImages')->get();
-
+        Log::info($user->name);
         foreach ($prizes as $prize) {
             $prize->userProductCount = Order::getProductCountForUser(Auth::id(), $prize->id);
         }
