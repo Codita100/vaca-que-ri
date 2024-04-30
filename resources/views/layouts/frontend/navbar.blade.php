@@ -52,7 +52,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link @if(request()->routeIs('transactions.index')) active-link @endif"
-                           href="{{route('transactions.index')}}">CONDIGOS</a>
+                           href="{{route('transactions.index')}}">Códigos</a>
                     </li>
 
                     <a class="navbar-brand d-none d-md-block" href="#">

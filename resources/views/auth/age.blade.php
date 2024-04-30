@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="col">
                                     <input type="number" min=1 maxlength="4" size="4" class="form-control custom-input"
-                                           placeholder="YY"  name="year"  value="{{ old('year') }}">
+                                           placeholder="AAAA"  name="year"  value="{{ old('year') }}">
                                 </div>
                             </div>
 

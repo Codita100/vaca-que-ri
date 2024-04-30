@@ -35,7 +35,7 @@
                         <div class="custom-table">
                             <div class="header-row">
                                 <span class="header-cell">Data</span>
-                                <span class="header-cell">Condigos</span>
+                                <span class="header-cell">Códigos</span>
                                 <span class="header-cell">Pontos</span>
                                 <span class="header-cell">Estado</span>
                             </div>

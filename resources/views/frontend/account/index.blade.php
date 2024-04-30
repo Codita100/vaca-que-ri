@@ -23,7 +23,8 @@
                     </div>
 
                     <div class="mx-auto text-center d-flex justify-content-center align-items-center my-3">
-                        <a class="btn yellow_button d-grid mx-auto mt-3 monstro" href="{{route('accumulate.index')}}"> SUBMETER NOVO CÓDIGO</a>
+                        <a class="btn yellow_button d-grid mx-auto mt-3 monstro" href="{{route('accumulate.index')}}">
+                            SUBMETER NOVO CÓDIGO</a>
                     </div>
 
                     <div class="mx-auto text-center d-flex justify-content-center align-items-center main_color my-3">
@@ -40,20 +41,22 @@
         </div>
     </section>
 
+
+
     <section class="background_main_color px-5 pt-5">
         <div class="container-fluid">
             <div class="row text-center my-5">
                 <h3 class="text-white monstro"><strong>PREMIOS</strong></h3>
             </div>
             <div class="row">
-                <div class="col-md-2 align-self-end">
+                <div class="col-md-1 align-self-end">
                     <img src="{{asset('images/graphics/my_account_graphic1.png')}}" class="img-fluid">
                 </div>
-                <div class="col-md-8">
-                    <div class="row">
+                <div class="col-md-10">
+                    <div class="row row-cols-1 row-cols-md-5">
                         @foreach($prizes as $product)
 
-                            <div class="col-md-3 mx-auto my-5 p-3">
+                            <div class="col mx-auto my-5 p-3">
                                 <div class="product position-relative">
                                     <div class="product-top">
                                         <div id="multiImageCarousel_{{$loop->index}}" class="carousel slide"
@@ -99,13 +102,15 @@
                                     </div>
 
                                     <div class="product-bottom background_second_color text-center main_color">
-                                        <div style="min-height: 58px"><h4 class="monstro second_color"><strong> {{$product->name}} </strong>
+                                        <div style="min-height: 58px"><h4 class="monstro second_color">
+                                                <strong> {{$product->name}} </strong>
                                             </h4></div>
                                         <div class="my-3"><h4 class="second_color myriad">{{$product->points}}
                                                 PONTOS</h4></div>
 
                                         <div><a id="queroJaButton" class="btn main_button d-grid"
-                                                href="{{ $product->stock == 0 ? '#' : route('consume.store', $product->id) }}" >QUERO JÁ!</a></div>
+                                                href="{{ $product->stock == 0 ? '#' : route('consume.store', $product->id) }}">QUERO
+                                                JÁ!</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +118,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <img src="{{asset('images/graphics/my_account_graphic1.png')}}" class="img-fluid">
                 </div>
             </div>
@@ -121,23 +126,25 @@
                 <h5 class="text-white">(Imagens meramente ilustrativas)</h5>
             </div>
         </div>
+    </section>
 
-        <script>
-            $(document).ready(function() {
-                $('#queroJaButton').click(function() {
-                    $(this).addClass('disabled').attr('disabled', 'disabled');
-                });
+
+    <script>
+        $(document).ready(function () {
+            $('#queroJaButton').click(function () {
+                $(this).addClass('disabled').attr('disabled', 'disabled');
             });
-        </script>
+        });
+    </script>
     @include('layouts.frontend.footer')
 
-        @if(session('success_order'))
-            <script>
-                $(document).ready(function(){
-                    $('#order_modal').modal('show');
-                });
-            </script>
-        @endif
+    @if(session('success_order'))
+        <script>
+            $(document).ready(function () {
+                $('#order_modal').modal('show');
+            });
+        </script>
+    @endif
 
 @endsection
 

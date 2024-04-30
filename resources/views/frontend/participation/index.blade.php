@@ -109,14 +109,14 @@
                 <h3 class="text-white monstro"><strong>PRÉMIOS DISPONÍVEIS</strong></h3>
             </div>
             <div class="row">
-                <div class="col-md-2 align-self-end">
+                <div class="col-md-1 align-self-end">
                     <img src="{{asset('images/graphics/my_account_graphic1.png')}}" class="img-fluid">
                 </div>
-                <div class="col-md-8">
-                    <div class="row">
+                <div class="col-md-10">
+                    <div class="row row-cols-1 row-cols-md-5">
                         @foreach($prizes as $product)
 
-                            <div class="col-md-3 mx-auto my-md-5 p-3">
+                            <div class="col mx-auto my-5 p-3">
                                 <div class="product position-relative">
                                     <div class="product-top">
                                         <div id="multiImageCarousel_{{$loop->index}}" class="carousel slide"
@@ -143,28 +143,28 @@
                                                 <span class="visually-hidden">Next</span>
                                             </button>
                                         </div>
-                                        @auth()
-                                            <div class="stock-overlay position-absolute top-0 start-0 p-2"
-                                                 style="margin-top: -24px; margin-left: -20px">
-                                                <div class="label text-white px-3 py-1 rounded-pill-custom"
-                                                     style="background-color: #E4211F">
-                                                    Ainda há: {{$product->stock}}
-                                                </div>
-                                            </div>
+{{--                                        @auth()--}}
+{{--                                            <div class="stock-overlay position-absolute top-0 start-0 p-2"--}}
+{{--                                                 style="margin-top: -24px; margin-left: -20px">--}}
+{{--                                                <div class="label text-white px-3 py-1 rounded-pill-custom"--}}
+{{--                                                     style="background-color: #E4211F">--}}
+{{--                                                    Ainda há: {{$product->stock}}--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
 
-                                            <div class="stock-overlay position-absolute top-0 end-0 p-2"
-                                                 style="margin-top: -24px; margin-right: -20px">
-                                                <div class="label text-dark px-3 py-1 rounded-pill-custom"
-                                                     style="background-color: #FAF6EA">
-                                                    Já tenho: {{$product->userProductCount}}
-                                                </div>
-                                            </div>
-                                        @endauth
+{{--                                            <div class="stock-overlay position-absolute top-0 end-0 p-2"--}}
+{{--                                                 style="margin-top: -24px; margin-right: -20px">--}}
+{{--                                                <div class="label text-dark px-3 py-1 rounded-pill-custom"--}}
+{{--                                                     style="background-color: #FAF6EA">--}}
+{{--                                                    Já tenho: {{$product->userProductCount}}--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        @endauth--}}
                                     </div>
 
 
                                     <div class="product-bottom background_second_color text-center main_color">
-                                        <div><h4 class="monstro second_color"><strong> {{$product->name}} </strong>
+                                        <div style="min-height: 58px"><h4 class="monstro second_color"><strong> {{$product->name}} </strong>
                                             </h4></div>
                                         <div class="my-3"><h4 class="second_color myriad">{{$product->points}}
                                                 PONTOS</h4></div>
@@ -180,7 +180,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <img src="{{asset('images/graphics/my_account_graphic1.png')}}" class="img-fluid">
                 </div>
             </div>
